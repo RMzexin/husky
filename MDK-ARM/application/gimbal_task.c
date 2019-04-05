@@ -93,22 +93,22 @@ void gimbal_pid_calc(volatile float *yaw_angle_set,volatile float *pitch_angle_s
 		//yaw轴串级PID计算
 	PID_Calc(&M6020_yaw_angle_pid, *yaw_angle, *yaw_angle_set );
 	PID_Calc(&M6020_yaw_speed_pid,yaw_gimbal_motor .angular_speed,M6020_yaw_angle_pid .pidout);
-	can_send .yaw = M6020_yaw_speed_pid .pidout ;	
+	can_send .S_yaw = M6020_yaw_speed_pid .pidout ;	
 	}
 	else if(yaw_feedback_set == IMU_FEEDBACK )
 	{
 	PID_Calc(&IMU_yaw_angle_pid, *yaw_angle, *yaw_angle_set );
 	PID_Calc(&IMU_yaw_speed_pid,yaw_gimbal_motor .angular_speed,IMU_yaw_angle_pid .pidout);
-	can_send .yaw = IMU_yaw_speed_pid .pidout ;
+	can_send .S_yaw = IMU_yaw_speed_pid .pidout ;
 	}
 	//pitch轴串级PID计算
 	PID_Calc(&M6020_pitch_angle_pid, *pitch_angle , *pitch_angle_set );
 	PID_Calc(&M6020_pitch_speed_pid,pitch_gimbal_motor .angular_speed,M6020_pitch_angle_pid .pidout);
-	can_send .pitch = M6020_pitch_speed_pid .pidout ;
+	can_send .S_pitch = M6020_pitch_speed_pid .pidout ;
 	//pluck串级PID计算
 	PID_Calc(&M2006_angle_pid, *pluck_angle , *pluck_angle_set );
 	PID_Calc(&M2006_speed_pid, pluck_motor .angular_speed,M2006_angle_pid .pidout);
-	can_send .pluck = M2006_speed_pid .pidout ;
+	can_send .S_pluck = M2006_speed_pid .pidout ;
 	
 }
 
@@ -191,7 +191,7 @@ void GIMBAL_CAN_SEND()
 		case GIMBAL_CALI :
 	  Set_Gimbal_Current(&hcan1, can_send .yaw_cali , can_send .pitch_cali , can_send .pluck_cali );break;
 		case GIMBAL_NORMAL :
-		Set_Gimbal_Current(&hcan1,(int16_t)can_send .yaw ,(int16_t)can_send .pitch ,(int16_t)can_send .pluck);break;
+		Set_Gimbal_Current(&hcan1,(int16_t)can_send .S_yaw ,(int16_t)can_send .S_pitch ,(int16_t)can_send .S_pluck);break;
 //		Set_Gimbal_Current(&hcan1,(int16_t)0.0,(int16_t)0.0 ,(int16_t)0.0);break;
 		default :
 	  Set_Gimbal_Current(&hcan1, 0 ,0 , 0 );break;

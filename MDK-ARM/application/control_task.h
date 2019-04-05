@@ -26,11 +26,6 @@
 #define YAW_ROTATE_INC_FACT    0.00028f //遥控器云台yaw通道系数
 #define PITCH_ROTATE_INC_FACT  0.00028f //遥控器云台pitch通道系数
 
-typedef enum 
-{
-	true,
-	false
-} Bool;
 //云台角度结构体定义
 typedef struct 
 {
@@ -66,4 +61,5 @@ void gimbal_change(void);
 void chassis_behavior(void);
 uint8_t  gimbal_set(void);
 float Correct_Angle_Feedback(void);
+void gimbal_PC_correct(int32_t*PC_yaw_add,int32_t*PC_pitch_add);
 #endif

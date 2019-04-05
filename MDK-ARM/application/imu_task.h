@@ -10,9 +10,9 @@ typedef struct
 	int16_t gyro[3];
 	int16_t acc [3];
 	
-	float pitch;
-	float yaw  ;
-	float roll ;
+	float ecd_pitch;
+	float ecd_yaw  ;
+	float ecd_roll ;
 }IMU_data_t;
 
 typedef struct
@@ -36,9 +36,9 @@ typedef struct
 	float yaw_dri;
 	int32_t round_cnt;   //È¦Êý
 	//³õÊ¼½Ç¶È
-	float pitch;
-	float yaw;
-	float roll;
+	float C_pitch;
+	float C_yaw;
+	float C_roll;
 	
 }IMU_t;
 

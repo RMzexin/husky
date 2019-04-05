@@ -311,7 +311,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,ARM_MATH_CM4,__TARGET_FPU_VFP,MPL_LOG_NDEBUG=1,EMPL,MPU9250,EMPL_TARGET_STM32F4</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;        ../Drivers/STM32F4xx_HAL_Driver/Inc;        ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;        ../Middlewares/Third_Party/FreeRTOS/Source/include;        ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;        ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;        ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;        ../Drivers/CMSIS/Include;        .\algorithm;        .\application;        ..\DMP</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;.\algorithm;.\application;..\DMP;..\RosLibs;..\RosLibs\skyguard_msgs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -465,6 +465,11 @@
               <FileName>keymouse_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\application\keymouse_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mains.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\application\mains.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -695,6 +700,21 @@
               <FileName>port.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Roslib</GroupName>
+          <Files>
+            <File>
+              <FileName>time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\RosLibs\time.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>STM32Hardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\RosLibs\STM32Hardware.h</FilePath>
             </File>
           </Files>
         </Group>

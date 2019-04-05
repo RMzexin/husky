@@ -57,6 +57,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
 #include "can.h"
+#include "mains.h"
 #include "can_task.h"
 #include "inv_mpu.h"
 #include "imu_task.h"
@@ -190,6 +191,7 @@ void StartControlTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+//		loop();
 		gimbal_change();
     vTaskDelay (1);
   }

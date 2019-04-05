@@ -39,12 +39,12 @@ void shanwai_send_wave_form(void)
 }	
 void shanwai_sprintf()
 {
-	Float_to_Byte(&encoder_pluck .ecd_angle ,wave_form_data,0);
-	Float_to_Byte(&M2006_angle .angle_set ,wave_form_data,4);
+	Float_to_Byte(&M6020_yaw_angle.angle_set,wave_form_data,0);
+	Float_to_Byte(&M6020_pitch_angle.angle_set,wave_form_data,4);
 	Float_to_Byte(&M2006_angle_pid .pidout ,wave_form_data,8);
 	Float_to_Byte(&M2006_speed_pid .pidout ,wave_form_data,12);
 	Float_to_Byte(&chassis_twisting_correct_pid.pidout,wave_form_data,16);
-	Float_to_Byte(&IMU.yaw ,wave_form_data,20);
+	Float_to_Byte(&IMU.C_yaw ,wave_form_data,20);
 	shanwai_send_wave_form();   //将数据传输到三外上位机，可以看到实时波形
 }
 

@@ -129,9 +129,9 @@ typedef struct
 
 typedef struct 
 {	
-	int16_t yaw;
-	int16_t pitch;
-	int16_t pluck;
+	int16_t S_yaw;
+	int16_t S_pitch;
+	int16_t S_pluck;
 	
 	int16_t yaw_cali;
 	int16_t pitch_cali;

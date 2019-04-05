@@ -14,6 +14,7 @@
 "infantry2.0\remote_task.o"
 "infantry2.0\shoot_task.o"
 "infantry2.0\keymouse_task.o"
+"infantry2.0\mains.o"
 "infantry2.0\pid.o"
 "infantry2.0\ramp.o"
 "infantry2.0\main.o"
@@ -55,6 +56,7 @@
 "infantry2.0\cmsis_os.o"
 "infantry2.0\heap_4.o"
 "infantry2.0\port.o"
+"infantry2.0\time.o"
 --library_type=microlib --strict --scatter "Infantry2.0\Infantry2.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

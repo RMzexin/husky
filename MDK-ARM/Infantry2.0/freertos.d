@@ -49,6 +49,7 @@ infantry2.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue
 infantry2.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 infantry2.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 infantry2.0\freertos.o: ../Inc/can.h
+infantry2.0\freertos.o: .\application\mains.h
 infantry2.0\freertos.o: .\application\can_task.h
 infantry2.0\freertos.o: ..\DMP\inv_mpu.h
 infantry2.0\freertos.o: ..\DMP\mpu9250.h

@@ -22,7 +22,7 @@ uint8_t Get_IMU_Data(void)
 				IMU .round_cnt ++;
 			else if(IMU .ecd_yaw - IMU .last_yaw > 300)
 				IMU .round_cnt --;
-			IMU .yaw = IMU .ecd_yaw + IMU .round_cnt*360.0f;
+			IMU .C_yaw = IMU .ecd_yaw + IMU .round_cnt*360.0f;
 		Correct_Angle_Feedback();
 			return 1 ;
 		}

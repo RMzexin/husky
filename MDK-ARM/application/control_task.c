@@ -1,10 +1,12 @@
 #include "control_task.h"
 #include "keymouse_task.h"
-#include "gimbal_task.h"
 #include "chassis_task.h"
+#include "gimbal_task.h"
 #include "shoot_task.h"
 #include "can_task.h"
 #include "imu_task.h"
+#include "mains.h"
+#include <stdbool.h>
 #include <stdlib.h>
 
 extern IMU_t IMU;
@@ -51,8 +53,8 @@ void gimbal_change(void)
 				{
 					M6020_yaw_angle .add_angle = 0.0f;
 					//计算电机编码器与陀螺仪相对角度,确定yaw轴固定角度
-					M6020_yaw_angle.relative_angle = M6020_encoder_yaw.ecd_angle - IMU.yaw ;
-					M6020_yaw_angle.yaw_fix_set    = IMU.yaw;
+					M6020_yaw_angle.relative_angle = M6020_encoder_yaw.ecd_angle - IMU.C_yaw ;
+					M6020_yaw_angle.yaw_fix_set    = IMU.C_yaw;
 					//pitch轴修正 角度限制（由编码器初次校准给定）
 					M6020_pitch_angle .angle_set += Pitch_Rotate_Data() * PITCH_ROTATE_INC_FACT;
 					ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min ) ;
@@ -84,11 +86,11 @@ void gimbal_change(void)
 				{
 					//pitch轴修正 角度限制（由编码器初次校准给定）
 					M6020_pitch_angle .angle_set += Pitch_Rotate_Data() * PITCH_ROTATE_INC_FACT;
-					ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min ) ;
+					ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min);
 					//当陀螺仪偏移设定角度，云台修正角度
 					M6020_yaw_angle .add_angle   -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT;
 					M6020_yaw_angle .angle_set = Correct_Angle_Feedback();
-					ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min ) ;
+					ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min);
 					//云台 底盘模式标志位，执行云台固定 底盘扭腰运动
 					chassis_mode = CHASSIS_TWISTING;
 					gimbal_mode  = GIMBAL_IMU ;
@@ -102,15 +104,23 @@ void gimbal_change(void)
 		gimbal_cali(&M6020_pitch_angle ,&M6020_yaw_angle,&M2006_angle,&M6020_encoder_yaw ,&M6020_encoder_pitch,&encoder_pluck);
 	}	
 }
-
+//PC角度修正
+void gimbal_PC_correct(int32_t *PC_yaw_add,int32_t*PC_pitch_add)
+{
+	M6020_pitch_angle .angle_set += *PC_pitch_add;
+	ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min);
+	M6020_yaw_angle .angle_set   += *PC_yaw_add  ;
+	ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min);
+}
+//IMU角度修正（放在IMU任务里）
 float Correct_Angle_Feedback()
 {
-	return  M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle-(IMU.yaw - M6020_yaw_angle.yaw_fix_set)+M6020_yaw_angle .add_angle;
+	return  M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle-(IMU.C_yaw - M6020_yaw_angle.yaw_fix_set)+M6020_yaw_angle .add_angle;
 }
 
 //放在大循环里
-static Bool chassis_max_get = GET_INITIAL ;
-static Bool chassis_min_get = GET_INITIAL ;
+bool static chassis_max_get = GET_INITIAL ;
+bool static chassis_min_get = GET_INITIAL ;
 static uint8_t chassis_mode_calc_set;
 void chassis_behavior()
 {
@@ -176,7 +186,7 @@ void chassis_behavior()
 	chassis_pid_calc(chassis_speed .vx ,chassis_speed .vy ,chassis_speed .wz,chassis_mode_calc_set);
 }
 
-//放在定时器里
+//放在定时器里（用于云台PID计算）
 static uint8_t yaw_angle_feedback_set;
 uint8_t gimbal_set()
 {

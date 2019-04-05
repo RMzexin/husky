@@ -34,9 +34,11 @@ infantry2.0\control_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ti
 infantry2.0\control_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry2.0\control_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\control_task.o: application\keymouse_task.h
-infantry2.0\control_task.o: application\gimbal_task.h
-infantry2.0\control_task.o: application\can_task.h
 infantry2.0\control_task.o: application\chassis_task.h
+infantry2.0\control_task.o: application\can_task.h
+infantry2.0\control_task.o: application\gimbal_task.h
 infantry2.0\control_task.o: application\shoot_task.h
 infantry2.0\control_task.o: application\imu_task.h
+infantry2.0\control_task.o: application\mains.h
+infantry2.0\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 infantry2.0\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
