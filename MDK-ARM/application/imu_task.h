@@ -24,12 +24,22 @@ typedef struct
 	float accx;
 	float accy;
 	float accz;
+	//初始角度
+	float ecd_pitch;
+	float ecd_yaw;
+	float ecd_roll;
+	//上一次角度
+	float last_pitch;
+	float last_yaw;
+	float last_roll;
 	
+	float yaw_dri;
+	int32_t round_cnt;   //圈数
+	//初始角度
 	float pitch;
 	float yaw;
 	float roll;
 	
-	float yaw_dri;
 }IMU_t;
 
 uint8_t Get_IMU_Data(void);

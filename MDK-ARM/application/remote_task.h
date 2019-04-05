@@ -47,13 +47,6 @@ short int Get_Mode_Data(void);
 void RC_Ctl_t_Init(void);
 void Callback_RC_Handle(RC_Type* rc, uint8_t* buff);
 
-uint8_t CHOICE_MODE(void);
-uint8_t FRICTION_WHEEL_MODE(void);
-int16_t Go_Forward_Data(void);
-int16_t Left_Right_Data(void);
-int16_t Yaw_Rotate_Data(void);
-int16_t Pitch_Rotate_Data(void);
-
 #endif
 
 

@@ -13,6 +13,7 @@
 "infantry2.0\print_task.o"
 "infantry2.0\remote_task.o"
 "infantry2.0\shoot_task.o"
+"infantry2.0\keymouse_task.o"
 "infantry2.0\pid.o"
 "infantry2.0\ramp.o"
 "infantry2.0\main.o"

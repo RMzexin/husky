@@ -1,6 +1,7 @@
 #include "print_task.h"
 #include "usart.h"
 #include "gimbal_task.h"
+#include "chassis_task.h"
 #include "control_task.h"
 #include "imu_task.h"
 #include "can_task.h"
@@ -8,10 +9,12 @@
 
 extern Encoder_t M6020_encoder_yaw,M6020_encoder_pitch,
                  encoder_pluck;
-extern Angle_t M6020_pitch_angle ,M6020_yaw_angle,M2006_angle;
+extern Angle_t M6020_pitch_angle ,M6020_yaw_angle,M2006_angle,chassis_angle;
 extern Gimbal_Motor_t yaw_gimbal_motor,pitch_gimbal_motor,pluck_motor;
-extern pid_t M6020_yaw_speed_pid,M6020_pitch_speed_pid,M6020_yaw_angle_pid,M6020_pitch_angle_pid,IMU_yaw_speed_pid   , IMU_yaw_angle_pid;
+extern pid_t M6020_yaw_speed_pid,M6020_pitch_speed_pid,M6020_yaw_angle_pid,M6020_pitch_angle_pid,
+	     M2006_speed_pid          , M2006_angle_pid     ,IMU_yaw_speed_pid  , IMU_yaw_angle_pid   ;
 extern IMU_t IMU;
+extern pid_t M3508_motor_speed_pid[4],M3508_twisting_pid[4],chassis_twisting_correct_pid,chassis_following_correct_pid;
 
 //该.c文件主要是配合山外调试助手发送波形
 unsigned char  wave_form_data[24] = {0};
@@ -36,12 +39,12 @@ void shanwai_send_wave_form(void)
 }	
 void shanwai_sprintf()
 {
-	Float_to_Byte(&IMU_yaw_angle_pid .pidout,wave_form_data,0);
-	Float_to_Byte(&M6020_yaw_angle.actual_angle,wave_form_data,4);
-	Float_to_Byte(&M6020_yaw_angle.angle_set,wave_form_data,8);
-	Float_to_Byte(&M6020_yaw_angle.actual_angle ,wave_form_data,12);
-	Float_to_Byte(&IMU_yaw_angle_pid .pidout,wave_form_data,16);
-	Float_to_Byte(&IMU.pitch,wave_form_data,20);
+	Float_to_Byte(&encoder_pluck .ecd_angle ,wave_form_data,0);
+	Float_to_Byte(&M2006_angle .angle_set ,wave_form_data,4);
+	Float_to_Byte(&M2006_angle_pid .pidout ,wave_form_data,8);
+	Float_to_Byte(&M2006_speed_pid .pidout ,wave_form_data,12);
+	Float_to_Byte(&chassis_twisting_correct_pid.pidout,wave_form_data,16);
+	Float_to_Byte(&IMU.yaw ,wave_form_data,20);
 	shanwai_send_wave_form();   //将数据传输到三外上位机，可以看到实时波形
 }
 

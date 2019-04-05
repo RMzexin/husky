@@ -51,24 +51,3 @@ void RC_Ctl_t_Init(void)	//对遥控器按键进行初始化
 	RC_Ctl.mouse.z = 0;	//鼠标在Z轴的移动速度
 	RC_Ctl.keyBoard.key_code = 0;
 }
-//遥控器拨杆
-uint8_t CHOICE_MODE(void){
-	return RC_Ctl.switch_right;}
-uint8_t FRICTION_WHEEL_MODE(void){
-	return RC_Ctl.switch_left;}
-//遥控器摇杆
-int16_t Go_Forward_Data(void){
-	return RC_Ctl .ch1 - 0x0400;}
-
-int16_t Left_Right_Data(void){
-	return RC_Ctl .ch0 - 0x0400;}
-
-int16_t Yaw_Rotate_Data(void){
-	return RC_Ctl .ch2 - 0x0400;}
-
-int16_t Pitch_Rotate_Data(void){
-	return RC_Ctl .ch3 - 0x0400;}
-
-	
-
-

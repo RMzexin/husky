@@ -127,7 +127,7 @@ void gimbal_pid_calc(volatile float *yaw_angle_set,volatile float *pitch_angle_s
 /***** 云台校准模式（执行一次）得到云台限位角度 *****/
 extern uint8_t chassis_mode , gimbal_mode;
 extern uint8_t Gimbal_Cali_Complete;
-void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,Encoder_t *encoder_yaw,Encoder_t *encoder_pitch)
+void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,volatile Angle_t *pluck,Encoder_t *encoder_yaw,Encoder_t *encoder_pitch,Encoder_t *encoder_pluck)
 {
 	static uint16_t cali_time = 0;
 	static uint16_t gimbal_cali_step =1 ;
@@ -176,7 +176,8 @@ void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,Encoder_t *encode
 							pitch ->angle_limit. middle = (pitch ->angle_limit. max + pitch ->angle_limit. min)/2;
 							yaw ->angle_limit. middle   = (yaw ->angle_limit. max   + yaw ->angle_limit. min)  /2;
 							pitch ->angle_set = pitch ->angle_limit .middle;
-							yaw  ->angle_set  = yaw ->angle_limit .middle  ;
+							yaw   ->angle_set = yaw   ->angle_limit .middle  ;
+							pluck ->angle_set = encoder_pluck ->ecd_angle ;
 							can_send_mode = GIMBAL_NORMAL ;
 							gimbal_mode = GIMBAL_ENCODER ; 
 							Gimbal_Cali_Complete ++ ;
@@ -191,6 +192,7 @@ void GIMBAL_CAN_SEND()
 	  Set_Gimbal_Current(&hcan1, can_send .yaw_cali , can_send .pitch_cali , can_send .pluck_cali );break;
 		case GIMBAL_NORMAL :
 		Set_Gimbal_Current(&hcan1,(int16_t)can_send .yaw ,(int16_t)can_send .pitch ,(int16_t)can_send .pluck);break;
+//		Set_Gimbal_Current(&hcan1,(int16_t)0.0,(int16_t)0.0 ,(int16_t)0.0);break;
 		default :
 	  Set_Gimbal_Current(&hcan1, 0 ,0 , 0 );break;
 	}

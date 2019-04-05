@@ -54,6 +54,7 @@ infantry2.0\freertos.o: ..\DMP\inv_mpu.h
 infantry2.0\freertos.o: ..\DMP\mpu9250.h
 infantry2.0\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
 infantry2.0\freertos.o: .\application\imu_task.h
+infantry2.0\freertos.o: .\application\Init_Task.h
 infantry2.0\freertos.o: .\application\print_task.h
 infantry2.0\freertos.o: .\application\gimbal_task.h
 infantry2.0\freertos.o: .\application\control_task.h

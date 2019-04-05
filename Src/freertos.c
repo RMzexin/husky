@@ -60,6 +60,7 @@
 #include "can_task.h"
 #include "inv_mpu.h"
 #include "imu_task.h"
+#include "Init_Task.h"
 #include "print_task.h"
 #include "gimbal_task.h"
 #include "shoot_task.h"
@@ -84,8 +85,9 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
+osThreadId InitTaskHandle;
 osThreadId ControlTaskHandle;
-osThreadId IMU_TaskHandle;
+osThreadId IMUTaskHandle;
 osThreadId ShootTaskHandle;
 osTimerId CanTimerSendHandle;
 
@@ -94,8 +96,9 @@ osTimerId CanTimerSendHandle;
    
 /* USER CODE END FunctionPrototypes */
 
+void StartInitTask(void const * argument);
 void StartControlTask(void const * argument);
-void StartIMU_Task(void const * argument);
+void StartIMUTask(void const * argument);
 void StartShootTask(void const * argument);
 void CanTimerSendCallback(void const * argument);
 
@@ -129,16 +132,20 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_TIMERS */
 
   /* Create the thread(s) */
+  /* definition and creation of InitTask */
+  osThreadDef(InitTask, StartInitTask, osPriorityHigh, 0, 512);
+  InitTaskHandle = osThreadCreate(osThread(InitTask), NULL);
+
   /* definition and creation of ControlTask */
-  osThreadDef(ControlTask, StartControlTask, osPriorityHigh, 0, 128);
+  osThreadDef(ControlTask, StartControlTask, osPriorityBelowNormal, 0, 512);
   ControlTaskHandle = osThreadCreate(osThread(ControlTask), NULL);
 
-  /* definition and creation of IMU_Task */
-  osThreadDef(IMU_Task, StartIMU_Task, osPriorityNormal, 0, 256);
-  IMU_TaskHandle = osThreadCreate(osThread(IMU_Task), NULL);
+  /* definition and creation of IMUTask */
+  osThreadDef(IMUTask, StartIMUTask, osPriorityNormal, 0, 256);
+  IMUTaskHandle = osThreadCreate(osThread(IMUTask), NULL);
 
   /* definition and creation of ShootTask */
-  osThreadDef(ShootTask, StartShootTask, osPriorityBelowNormal, 0, 128);
+  osThreadDef(ShootTask, StartShootTask, osPriorityIdle, 0, 256);
   ShootTaskHandle = osThreadCreate(osThread(ShootTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -150,6 +157,26 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 }
 
+/* USER CODE BEGIN Header_StartInitTask */
+/**
+  * @brief  Function implementing the InitTask thread.
+  * @param  argument: Not used 
+  * @retval None
+  */
+/* USER CODE END Header_StartInitTask */
+void StartInitTask(void const * argument)
+{
+
+  /* USER CODE BEGIN StartInitTask */
+  /* Infinite loop */
+		bsp_init ();
+		my_can_filter_init_recv_all(&hcan1);     //配置CAN过滤器
+		HAL_CAN_Receive_IT(&hcan1, CAN_FIFO0);   //启动CAN接收中断
+	  osTimerStart(CanTimerSendHandle, 1);
+		vTaskDelete (InitTaskHandle);
+  /* USER CODE END StartInitTask */
+}
+
 /* USER CODE BEGIN Header_StartControlTask */
 /**
   * @brief  Function implementing the ControlTask thread.
@@ -159,41 +186,35 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartControlTask */
 void StartControlTask(void const * argument)
 {
-
   /* USER CODE BEGIN StartControlTask */
-	my_can_filter_init_recv_all(&hcan1);     //配置CAN过滤器
-  HAL_CAN_Receive_IT(&hcan1, CAN_FIFO0);   //启动CAN接收中断
-	osTimerStart(CanTimerSendHandle, 1);
   /* Infinite loop */
   for(;;)
   {
 		gimbal_change();
-   osDelay(1);
+    vTaskDelay (1);
   }
   /* USER CODE END StartControlTask */
 }
 
-/* USER CODE BEGIN Header_StartIMU_Task */
+/* USER CODE BEGIN Header_StartIMUTask */
 /**
-* @brief Function implementing the IMU_Task thread.
+* @brief Function implementing the IMUTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartIMU_Task */
-void StartIMU_Task(void const * argument)
+/* USER CODE END Header_StartIMUTask */
+void StartIMUTask(void const * argument)
 {
-  /* USER CODE BEGIN StartIMU_Task */
+  /* USER CODE BEGIN StartIMUTask */
 	portTickType CurrentControlTick = 0;                //当前系统时间
-//  uint32_t dmpresetCounter;                            //dmp重启计数器
   /* Infinite loop */
   for(;;)
   {
-		CurrentControlTick = xTaskGetTickCount();
-		Get_IMU_Data();
-		shanwai_sprintf();
-		vTaskDelayUntil(&CurrentControlTick, 5 / portTICK_RATE_MS);
+    CurrentControlTick = xTaskGetTickCount();
+    Get_IMU_Data();
+    vTaskDelayUntil(&CurrentControlTick, 5 / portTICK_RATE_MS);
   }
-  /* USER CODE END StartIMU_Task */
+  /* USER CODE END StartIMUTask */
 }
 
 /* USER CODE BEGIN Header_StartShootTask */
@@ -210,7 +231,8 @@ void StartShootTask(void const * argument)
   for(;;)
   {
 		shoot_mode();
-    osDelay(10);
+		shanwai_sprintf();
+		vTaskDelay (2);
   }
   /* USER CODE END StartShootTask */
 }

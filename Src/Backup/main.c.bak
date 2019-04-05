@@ -129,7 +129,7 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_CAN1_Init();
-  MX_I2C1_Init();
+//  MX_I2C1_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
@@ -140,9 +140,6 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_Base_Start_IT(&htim5);
 	HAL_UART_Receive_IT_IDLE(&huart2,UART_Buffer,100);
-	bsp_init ();
-	HAL_Delay(500);
-	mpu_dmp_init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -227,11 +224,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim->Instance == TIM6) {
     HAL_IncTick();
   }
-	if (htim->Instance == TIM3) {
-		gimbal_set();
-  }
   /* USER CODE BEGIN Callback 1 */
-
+  if (htim->Instance == TIM3) {
+    gimbal_set();
+  }
   /* USER CODE END Callback 1 */
 }
 

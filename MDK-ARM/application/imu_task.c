@@ -1,6 +1,7 @@
 #include "imu_task.h"
 #include "inv_mpu.h"
 #include "mpu9250.h"
+#include "control_task.h"
 #include "IOI2C.h"
 #include "REG.h"
 #include "main.h"
@@ -15,7 +16,14 @@ uint8_t Get_IMU_Data(void)
 	IICreadBytes(0x50, AX, 24,&chrTemp[0]);
 		if(chrTemp[22]!= 0x00)
 		{
-		IMU.yaw = (float)CharToShort(&chrTemp[22])/32768*180 + 180.0f;
+			IMU .last_yaw = IMU .ecd_yaw;
+			IMU .ecd_yaw  = (float)CharToShort(&chrTemp[22])/32768*180.0f;
+		  if(IMU .ecd_yaw - IMU .last_yaw < -300)
+				IMU .round_cnt ++;
+			else if(IMU .ecd_yaw - IMU .last_yaw > 300)
+				IMU .round_cnt --;
+			IMU .yaw = IMU .ecd_yaw + IMU .round_cnt*360.0f;
+		Correct_Angle_Feedback();
 			return 1 ;
 		}
 		return 0 ;

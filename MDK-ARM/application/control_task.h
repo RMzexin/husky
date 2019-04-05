@@ -14,6 +14,10 @@
 //云台模式切换
 #define GIMBAL_ENCODER     1
 #define GIMBAL_IMU         2
+//小陀螺旋转角度获得
+#define GET_COMPLETE  false
+#define GET_INITIAL   true
+#define TWISTING_INC_FACT   0.7428f  //小陀螺限幅系数
 
 //底盘速度调节
 #define GO_FORWARD_INC_FACT        0.22f //遥控器前进通道系数
@@ -40,8 +44,14 @@ typedef struct
 {
 	Angle_Limit_t angle_limit; //角度限制
 	float angle_set;           //给定角度
-	float relative_angle;      //相对角度
 	float actual_angle;        //实际角度
+	
+	float relative_angle;      //相对角度
+	float yaw_fix_set;         //yaw轴固定角度
+	float correct_angle;       //修正角度
+	float add_angle;           //跟随时增加的角度
+	
+	
 }Angle_t;
  
 //底盘速度结构体定义
@@ -55,4 +65,5 @@ typedef struct
 void gimbal_change(void);
 void chassis_behavior(void);
 uint8_t  gimbal_set(void);
+float Correct_Angle_Feedback(void);
 #endif

@@ -38,5 +38,6 @@ infantry2.0\print_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart
 infantry2.0\print_task.o: application\gimbal_task.h
 infantry2.0\print_task.o: application\control_task.h
 infantry2.0\print_task.o: application\can_task.h
+infantry2.0\print_task.o: application\chassis_task.h
 infantry2.0\print_task.o: application\imu_task.h
 infantry2.0\print_task.o: .\algorithm\pid.h

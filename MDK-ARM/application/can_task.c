@@ -103,9 +103,9 @@ void Get_2006_Encoder(volatile Encoder_t *v, CAN_HandleTypeDef*_hcan)
 	v->last_ecd      = v->ecd;
 	v->ecd           = (_hcan->pRxMsg->Data[0]<<8)|_hcan->pRxMsg->Data[1];  
 	if(_hcan->pRxMsg->Data[2] & 128){		
-		v->speed_rpm =(~(65535-((_hcan->pRxMsg->Data[2]<<8)|_hcan->pRxMsg->Data[3]))/19);
+		v->speed_rpm =(~(65535-((_hcan->pRxMsg->Data[2]<<8)|_hcan->pRxMsg->Data[3]))/36);
 	}else{
-		v->speed_rpm =(((_hcan->pRxMsg->Data[2]<<8)|_hcan->pRxMsg->Data[3])/19);}
+		v->speed_rpm =(((_hcan->pRxMsg->Data[2]<<8)|_hcan->pRxMsg->Data[3])/36);}
   v->given_current = (_hcan->pRxMsg->Data[4]<<8)|_hcan->pRxMsg->Data[5]; 
   v->temperate     = (_hcan->pRxMsg->Data[6]);
 	v->diff = v->ecd - v->last_ecd;

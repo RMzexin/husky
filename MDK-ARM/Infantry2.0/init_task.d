@@ -1,8 +1,7 @@
 infantry2.0\init_task.o: application\Init_Task.c
 infantry2.0\init_task.o: application\Init_Task.h
 infantry2.0\init_task.o: application\chassis_task.h
-infantry2.0\init_task.o: application\gimbal_task.h
-infantry2.0\init_task.o: application\control_task.h
+infantry2.0\init_task.o: application\can_task.h
 infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 infantry2.0\init_task.o: ../Inc/stm32f4xx_hal_conf.h
 infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
@@ -36,7 +35,8 @@ infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_e
 infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry2.0\init_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-infantry2.0\init_task.o: application\can_task.h
+infantry2.0\init_task.o: application\control_task.h
+infantry2.0\init_task.o: application\gimbal_task.h
 infantry2.0\init_task.o: application\remote_task.h
 infantry2.0\init_task.o: application\shoot_task.h
 infantry2.0\init_task.o: ..\DMP\inv_mpu.h

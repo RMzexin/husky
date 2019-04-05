@@ -461,6 +461,11 @@
               <FileType>1</FileType>
               <FilePath>.\application\shoot_task.c</FilePath>
             </File>
+            <File>
+              <FileName>keymouse_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\application\keymouse_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

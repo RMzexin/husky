@@ -36,6 +36,7 @@ infantry2.0\imu_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\imu_task.o: ..\DMP\inv_mpu.h
 infantry2.0\imu_task.o: ..\DMP\mpu9250.h
 infantry2.0\imu_task.o: ../Drivers/CMSIS/Include/core_cm4.h
+infantry2.0\imu_task.o: application\control_task.h
 infantry2.0\imu_task.o: ..\DMP\IOI2C.h
 infantry2.0\imu_task.o: ../Inc/main.h
 infantry2.0\imu_task.o: ..\DMP\REG.h
