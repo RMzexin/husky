@@ -53,4 +53,6 @@ infantry2.0\mains.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry2.0\mains.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\mains.o: application\mains.h
 infantry2.0\mains.o: ..\RosLibs\skyguard_msgs\gimbal.h
+infantry2.0\mains.o: application\shoot_task.h
 infantry2.0\mains.o: application\control_task.h
+infantry2.0\mains.o: application\keymouse_task.h

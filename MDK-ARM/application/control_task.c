@@ -104,13 +104,20 @@ void gimbal_change(void)
 		gimbal_cali(&M6020_pitch_angle ,&M6020_yaw_angle,&M2006_angle,&M6020_encoder_yaw ,&M6020_encoder_pitch,&encoder_pluck);
 	}	
 }
-//PC角度修正
+//PC角度修正(放在ROS通信回调函数中）
 void gimbal_PC_correct(int32_t *PC_yaw_add,int32_t*PC_pitch_add)
 {
-	M6020_pitch_angle .angle_set += *PC_pitch_add;
+	M6020_pitch_angle .angle_set += *PC_pitch_add ;
 	ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min);
-	M6020_yaw_angle .angle_set   += *PC_yaw_add  ;
-	ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min);
+	if(CHOICE_MODE() == AUTONOMY)
+	{
+		M6020_yaw_angle .angle_set += *PC_yaw_add ;
+		ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min);
+	}
+	else if(CHOICE_MODE() == FOLLOWING || CHOICE_MODE() == TWISTING )
+	{
+		M6020_yaw_angle .add_angle += *PC_yaw_add ;
+	}
 }
 //IMU角度修正（放在IMU任务里）
 float Correct_Angle_Feedback()
@@ -128,14 +135,15 @@ void chassis_behavior()
 	{
 		case CHASSIS_AUTONOMY :
 		{
-			//遥控右拨杆控制前后左右平移，左拨杆控制云台
+			//控制底盘前后平移，左右转弯；左拨杆控制云台
 			chassis_speed .vx = Go_Forward_Data()* GO_FORWARD_INC_FACT ;
 		  chassis_speed .vy = 0.0f ;
-		  chassis_speed .wz = Left_Right_Data()* LEFT_RIGHT_INC_FACT;
+		  chassis_speed .wz = -Left_Right_Data()* LEFT_RIGHT_INC_FACT;
 			chassis_mode_calc_set = AUTONOMY ;break;
 		}
 		case CHASSIS_FOLLOWING :
 		{
+			//控制底盘前后平移，左右平移；底盘跟随云台运动
 			chassis_speed .vx = Go_Forward_Data()* GO_FORWARD_INC_FACT ;
 		  chassis_speed .vy = Left_Right_Data()* LEFT_RIGHT_INC_FACT ;
 		  chassis_speed .wz = Follow_Speed_Calc(&M6020_encoder_yaw.ecd_angle,&M6020_yaw_angle .angle_limit .middle);
@@ -190,6 +198,7 @@ void chassis_behavior()
 static uint8_t yaw_angle_feedback_set;
 uint8_t gimbal_set()
 {
+	//判断拨弹轮电机是否堵转
 	if(M2006_angle .angle_set - M2006_angle .actual_angle < 1000.0f)
 	{
 		M2006_angle .angle_set += pluck_angle_add();

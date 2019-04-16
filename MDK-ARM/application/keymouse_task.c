@@ -1,7 +1,10 @@
 #include "keymouse_task.h"
 #include "control_task.h"
 #include "remote_task.h"
+#include "FreeRTOS.h"
+#include "task.h"
 #include "ramp.h"
+#include <stdbool.h>
 
 ramp_t Km_forward_ramp    = RAMP_GEN_DAFAULT;
 ramp_t Km_backoff_ramp    = RAMP_GEN_DAFAULT;
@@ -159,6 +162,74 @@ int16_t Pitch_Rotate_Data(void)
 	}
 	return 0 ;
 }
+
+//右键瞄准
+bool static Receive = true;
+uint8_t pc_aim()
+{
+	static uint32_t system_runtime;
+  static uint32_t last_system_runtime;
+  system_runtime = xTaskGetTickCount();
+  if(RC_Ctl .mouse .press_right == 1 &&Receive )
+	{
+		Receive = false;
+		return true;
+	}
+	else if(RC_Ctl .mouse .press_right == 0 && (system_runtime - last_system_runtime >= KEY_JITTER_TIME))
+	{
+		Receive = true;
+		last_system_runtime = system_runtime ;
+		return false;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//左键发射
+uint8_t launch()
+{
+	static uint32_t system_runtime;
+  static uint32_t last_system_runtime;
+  system_runtime = xTaskGetTickCount();
+  if(RC_Ctl .mouse .press_left == 1 &&Receive )
+	{
+		Receive = false;
+		return true;
+	}
+	else if(RC_Ctl .mouse .press_left == 0 && (system_runtime - last_system_runtime >= KEY_JITTER_TIME))
+	{
+		Receive = true;
+		last_system_runtime = system_runtime ;
+		return false;
+	}
+	else
+	{
+		return false;
+	}	
+}
+
+//射速调节
+bool static increase = true;
+uint8_t firing_tate()
+{
+	static uint32_t system_runtime;
+  static uint32_t last_system_runtime;
+	static uint8_t  shooting_mode = 1;
+  system_runtime = xTaskGetTickCount();
+	if(judge_key_press(KEY_Q) && (system_runtime - last_system_runtime >= FIRING_TATE_TIME))
+	{
+		if(increase) shooting_mode++;
+		else         shooting_mode--;
+		
+		if(shooting_mode == 2)      increase = true;
+		else if(shooting_mode == 3) increase = false;
+		last_system_runtime = system_runtime ;	
+	}
+	return shooting_mode;
+}
+
 
 //判断按键已按下
 uint8_t judge_key_press(uint16_t key)

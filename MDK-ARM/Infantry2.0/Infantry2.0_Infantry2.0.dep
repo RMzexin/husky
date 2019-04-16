@@ -206,8 +206,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x5C21CFB6)
-F (.\application\chassis_task.c)(0x5CA30A70)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\chassis_task.o --omf_browse infantry2.0\chassis_task.crf --depend infantry2.0\chassis_task.d)
-I (application\chassis_task.h)(0x5CA1AE50)
+F (.\application\chassis_task.c)(0x5CB2A0FB)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\chassis_task.o --omf_browse infantry2.0\chassis_task.crf --depend infantry2.0\chassis_task.d)
+I (application\chassis_task.h)(0x5CB2A031)
 I (application\can_task.h)(0x5C9758FD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
@@ -241,12 +241,13 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
+I (application\keymouse_task.h)(0x5CB3CA76)
 I (../Inc/can.h)(0x5CA70EFB)
 I (../Inc/main.h)(0x5CA70F00)
 I (.\algorithm\pid.h)(0x5C81DF87)
-F (.\application\control_task.c)(0x5CA6DC10)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\control_task.o --omf_browse infantry2.0\control_task.crf --depend infantry2.0\control_task.d)
-I (application\control_task.h)(0x5CA6CF22)
+F (.\application\control_task.c)(0x5CB2A274)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\control_task.o --omf_browse infantry2.0\control_task.crf --depend infantry2.0\control_task.d)
+I (application\control_task.h)(0x5CAC603F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C21CFA5)
@@ -279,18 +280,18 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-I (application\keymouse_task.h)(0x5CA31341)
-I (application\chassis_task.h)(0x5CA1AE50)
+I (application\keymouse_task.h)(0x5CB3CA76)
+I (application\chassis_task.h)(0x5CB2A031)
 I (application\can_task.h)(0x5C9758FD)
 I (application\gimbal_task.h)(0x5CA6DC10)
-I (application\shoot_task.h)(0x5CA5FD1E)
+I (application\shoot_task.h)(0x5CB3CCF1)
 I (application\imu_task.h)(0x5CA6DC10)
-I (application\mains.h)(0x5CA6F643)
+I (application\mains.h)(0x5CA99259)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-F (.\application\gimbal_task.c)(0x5CA6DC10)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\gimbal_task.o --omf_browse infantry2.0\gimbal_task.crf --depend infantry2.0\gimbal_task.d)
+F (.\application\gimbal_task.c)(0x5CABFEC2)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\gimbal_task.o --omf_browse infantry2.0\gimbal_task.crf --depend infantry2.0\gimbal_task.d)
 I (application\gimbal_task.h)(0x5CA6DC10)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C21CFA5)
@@ -330,7 +331,7 @@ I (.\algorithm\pid.h)(0x5C81DF87)
 I (../Drivers/CMSIS/Include/arm_math.h)(0x5C21CFA2)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
-F (.\application\imu_task.c)(0x5CA6DC10)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\imu_task.o --omf_browse infantry2.0\imu_task.crf --depend infantry2.0\imu_task.d)
+F (.\application\imu_task.c)(0x5CB3CA76)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\imu_task.o --omf_browse infantry2.0\imu_task.crf --depend infantry2.0\imu_task.d)
 I (application\imu_task.h)(0x5CA6DC10)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
@@ -366,7 +367,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
 I (..\DMP\inv_mpu.h)(0x5C92F03D)
 I (..\DMP\mpu9250.h)(0x5C480626)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
 I (..\DMP\IOI2C.h)(0x5C9CB4F6)
 I (../Inc/main.h)(0x5CA70F00)
 I (..\DMP\REG.h)(0x5C9A1B00)
@@ -385,8 +386,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x5C21CFB6)
-F (.\application\Init_Task.c)(0x5CA70CB5)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\init_task.o --omf_browse infantry2.0\init_task.crf --depend infantry2.0\init_task.d)
-I (application\mains.h)(0x5CA6F643)
+F (.\application\Init_Task.c)(0x5CB2D8E8)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\init_task.o --omf_browse infantry2.0\init_task.crf --depend infantry2.0\init_task.d)
+I (application\mains.h)(0x5CA99259)
 I (..\DMP\inv_mpu.h)(0x5C92F03D)
 I (..\DMP\mpu9250.h)(0x5C480626)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
@@ -422,12 +423,12 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
 I (application\Init_Task.h)(0x5C8F28ED)
-I (application\shoot_task.h)(0x5CA5FD1E)
+I (application\shoot_task.h)(0x5CB3CCF1)
 I (application\remote_task.h)(0x5CA2BECE)
 I (application\gimbal_task.h)(0x5CA6DC10)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
 I (application\can_task.h)(0x5C9758FD)
-I (application\chassis_task.h)(0x5CA1AE50)
+I (application\chassis_task.h)(0x5CB2A031)
 F (.\application\print_task.c)(0x5CA70A7E)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\print_task.o --omf_browse infantry2.0\print_task.crf --depend infantry2.0\print_task.d)
 I (application\print_task.h)(0x5C8F28ED)
 I (../Inc/usart.h)(0x5CA70EFE)
@@ -465,9 +466,9 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
 I (application\gimbal_task.h)(0x5CA6DC10)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
 I (application\can_task.h)(0x5C9758FD)
-I (application\chassis_task.h)(0x5CA1AE50)
+I (application\chassis_task.h)(0x5CB2A031)
 I (application\imu_task.h)(0x5CA6DC10)
 I (.\algorithm\pid.h)(0x5C81DF87)
 F (.\application\remote_task.c)(0x5CA2BECB)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\remote_task.o --omf_browse infantry2.0\remote_task.crf --depend infantry2.0\remote_task.d)
@@ -504,8 +505,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-F (.\application\shoot_task.c)(0x5CA5FE42)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\shoot_task.o --omf_browse infantry2.0\shoot_task.crf --depend infantry2.0\shoot_task.d)
-I (application\shoot_task.h)(0x5CA5FD1E)
+F (.\application\shoot_task.c)(0x5CB3C9E8)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\shoot_task.o --omf_browse infantry2.0\shoot_task.crf --depend infantry2.0\shoot_task.d)
+I (application\shoot_task.h)(0x5CB3CCF1)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C21CFA5)
@@ -538,7 +539,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-I (application\keymouse_task.h)(0x5CA31341)
+I (application\keymouse_task.h)(0x5CB3CA76)
 I (application\remote_task.h)(0x5CA2BECE)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5C21CFB6)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599ECD2C)
@@ -553,8 +554,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x5C21CFB6)
 I (.\algorithm\ramp.h)(0x5C8F3048)
 I (../Inc/tim.h)(0x5CA70EFE)
 I (../Inc/main.h)(0x5CA70F00)
-F (.\application\keymouse_task.c)(0x5CA57270)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\keymouse_task.o --omf_browse infantry2.0\keymouse_task.crf --depend infantry2.0\keymouse_task.d)
-I (application\keymouse_task.h)(0x5CA31341)
+F (.\application\keymouse_task.c)(0x5CB3C9E8)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\keymouse_task.o --omf_browse infantry2.0\keymouse_task.crf --depend infantry2.0\keymouse_task.d)
+I (application\keymouse_task.h)(0x5CB3CA76)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5CA70EFF)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C21CFA5)
@@ -587,10 +588,21 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\control_task.h)(0x5CAC603F)
 I (application\remote_task.h)(0x5CA2BECE)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5C21CFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599ECD2C)
+I (../Inc/FreeRTOSConfig.h)(0x5CA70EFD)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x5C21CFB6)
+I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x5C21CFB6)
 I (.\algorithm\ramp.h)(0x5C8F3048)
-F (.\application\mains.cpp)(0x5CA70BBA)(--cpp -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\mains.o --omf_browse infantry2.0\mains.crf --depend infantry2.0\mains.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
+F (.\application\mains.cpp)(0x5CAF1078)(--cpp -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\mains.o --omf_browse infantry2.0\mains.crf --depend infantry2.0\mains.d)
 I (..\RosLibs\ros.h)(0x5AD97230)
 I (..\RosLibs\ros/node_handle.h)(0x5AD97230)
 I (..\RosLibs\std_msgs/Time.h)(0x5AD97230)
@@ -641,9 +653,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-I (application\mains.h)(0x5CA6F643)
+I (application\mains.h)(0x5CA99259)
 I (..\RosLibs\skyguard_msgs\gimbal.h)(0x5CA6DDB6)
-I (application\control_task.h)(0x5CA6CF22)
+I (application\shoot_task.h)(0x5CB3CCF1)
+I (application\control_task.h)(0x5CAC603F)
+I (application\keymouse_task.h)(0x5CB3CA76)
 F (.\algorithm\pid.c)(0x5C90EA2D)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\pid.o --omf_browse infantry2.0\pid.crf --depend infantry2.0\pid.d)
 I (algorithm\pid.h)(0x5C81DF87)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C21CFA5)
@@ -774,7 +788,7 @@ I (..\DMP\inv_mpu.h)(0x5C92F03D)
 I (..\DMP\mpu9250.h)(0x5C480626)
 I (.\application\Init_Task.h)(0x5C8F28ED)
 I (.\application\gimbal_task.h)(0x5CA6DC10)
-I (.\application\control_task.h)(0x5CA6CF22)
+I (.\application\control_task.h)(0x5CAC603F)
 I (.\application\can_task.h)(0x5C9758FD)
 F (../Src/gpio.c)(0x5CA70EF6)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\gpio.o --omf_browse infantry2.0\gpio.crf --depend infantry2.0\gpio.d)
 I (../Inc/gpio.h)(0x5CA70EF6)
@@ -881,7 +895,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5C21CFA5)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5C21CFA5)
-F (../Src/freertos.c)(0x5CA70EFD)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\freertos.o --omf_browse infantry2.0\freertos.crf --depend infantry2.0\freertos.d)
+F (../Src/freertos.c)(0x5CB2D8E8)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\freertos.o --omf_browse infantry2.0\freertos.crf --depend infantry2.0\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5C21CFB6)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599ECD2C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -931,7 +945,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x5C21CFB6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x5C21CFB6)
 I (../Inc/can.h)(0x5CA70EFB)
-I (.\application\mains.h)(0x5CA6F643)
+I (.\application\mains.h)(0x5CA99259)
 I (.\application\can_task.h)(0x5C9758FD)
 I (..\DMP\inv_mpu.h)(0x5C92F03D)
 I (..\DMP\mpu9250.h)(0x5C480626)
@@ -939,8 +953,8 @@ I (.\application\imu_task.h)(0x5CA6DC10)
 I (.\application\Init_Task.h)(0x5C8F28ED)
 I (.\application\print_task.h)(0x5C8F28ED)
 I (.\application\gimbal_task.h)(0x5CA6DC10)
-I (.\application\control_task.h)(0x5CA6CF22)
-I (.\application\shoot_task.h)(0x5CA5FD1E)
+I (.\application\control_task.h)(0x5CAC603F)
+I (.\application\shoot_task.h)(0x5CB3CCF1)
 F (../Src/i2c.c)(0x5CA70EFD)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I .\algorithm -I .\application -I ..\DMP -I ..\RosLibs -I ..\RosLibs\skyguard_msgs-I.\RTE\_Infantry2.0-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.3.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -DMPL_LOG_NDEBUG="1" -DEMPL -DMPU9250 -DEMPL_TARGET_STM32F4-o infantry2.0\i2c.o --omf_browse infantry2.0\i2c.crf --depend infantry2.0\i2c.d)
 I (../Inc/i2c.h)(0x5CA70EFD)
 I (../Inc/main.h)(0x5CA70F00)

@@ -1,4 +1,5 @@
 #include "chassis_task.h"
+#include "keymouse_task.h"
 #include "can_task.h"
 #include "can.h"
 #include "pid.h"
@@ -37,6 +38,13 @@ void chassis_init(void)
 		         CHASSIS_FOLLOWING_CORRECT_MAXOUTPUT  ,CHASSIS_FOLLOWING_CORRECT_MINOUTPUT   );
 }
 
+#define PIDOUT_LIMIT(pidout,pidout_max,pidout_min)        \
+{                                                     \
+	if(pidout > pidout_max){                              \
+		pidout = pidout_max;                                \
+	}else if(pidout<pidout_min){                          \
+	  pidout = pidout_min;}                               \
+}
 void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t chassis_calc_set)
 {
 	static float wheel_speed[4];
@@ -47,33 +55,61 @@ void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t
 	wheel_speed[3] = -speed_vx - speed_vy  - speed_wz ;
 	if(chassis_calc_set == AUTONOMY)
 	{
-		for (i = 0;i < 4; i++ )
-		{
-			PID_Calc(&M3508_motor_speed_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
-		}
-		Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
-	                      (int16_t)M3508_motor_speed_pid[1].pidout,
-	                      (int16_t)M3508_motor_speed_pid[2].pidout,
-	                      (int16_t)M3508_motor_speed_pid[3].pidout );
-//		Set_CM_Speed(&hcan1,(int16_t)0.0,
-//	                      (int16_t)0.0,
-//	                      (int16_t)0.0,
-//	                      (int16_t)0.0 );		
+		if(control_mode_selection() == KEY_MOUSE_MODE)
+			{
+				for (i = 0;i < 4; i++ )
+				{
+					PID_Calc(&M3508_motor_speed_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
+				}
+				Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
+				(int16_t)M3508_motor_speed_pid[1].pidout,
+				(int16_t)M3508_motor_speed_pid[2].pidout,
+				(int16_t)M3508_motor_speed_pid[3].pidout );
+			}
+			else if(control_mode_selection() == REMOTE_CONTROL_MODE)
+			{
+				for (i = 0;i < 4; i++ )
+				{
+					PID_Calc(&M3508_motor_speed_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
+				  PIDOUT_LIMIT(M3508_motor_speed_pid[0].pidout,2500.0f,-2500.0f);
+					PIDOUT_LIMIT(M3508_motor_speed_pid[1].pidout,2500.0f,-2500.0f);
+					PIDOUT_LIMIT(M3508_motor_speed_pid[2].pidout,2500.0f,-2500.0f);					
+					PIDOUT_LIMIT(M3508_motor_speed_pid[3].pidout,2500.0f,-2500.0f);
+				}
+				Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
+				(int16_t)M3508_motor_speed_pid[1].pidout,
+				(int16_t)M3508_motor_speed_pid[2].pidout,
+				(int16_t)M3508_motor_speed_pid[3].pidout );
+			}
 	}
 	if(chassis_calc_set == TWISTING)
 	{
+		if(control_mode_selection() == KEY_MOUSE_MODE)
+			{
 				for (i = 0;i < 4; i++ )
-		{
-			PID_Calc(&M3508_twisting_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
-		}
-		Set_CM_Speed(&hcan1,(int16_t)M3508_twisting_pid[0].pidout,
-	                      (int16_t)M3508_twisting_pid[1].pidout,
-	                      (int16_t)M3508_twisting_pid[2].pidout,
-	                      (int16_t)M3508_twisting_pid[3].pidout );	
-//		Set_CM_Speed(&hcan1,(int16_t)0.0,
-//	                      (int16_t)0.0,
-//	                      (int16_t)0.0,
-//	                      (int16_t)0.0 );		
+				{
+					PID_Calc(&M3508_twisting_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
+				}
+				Set_CM_Speed(&hcan1,(int16_t)M3508_twisting_pid[0].pidout,
+	                          (int16_t)M3508_twisting_pid[1].pidout,
+	                          (int16_t)M3508_twisting_pid[2].pidout,
+	                          (int16_t)M3508_twisting_pid[3].pidout );	
+			}
+			else if(control_mode_selection() == REMOTE_CONTROL_MODE)
+			{
+				for (i = 0;i < 4; i++ )
+				{
+					PID_Calc(&M3508_twisting_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
+					PIDOUT_LIMIT(M3508_twisting_pid[0].pidout,2500.0f,-2500.0f);
+					PIDOUT_LIMIT(M3508_twisting_pid[1].pidout,2500.0f,-2500.0f);
+					PIDOUT_LIMIT(M3508_twisting_pid[2].pidout,2500.0f,-2500.0f);					
+					PIDOUT_LIMIT(M3508_twisting_pid[3].pidout,2500.0f,-2500.0f);
+				}				
+				Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
+				(int16_t)M3508_twisting_pid[1].pidout,
+				(int16_t)M3508_twisting_pid[2].pidout,
+				(int16_t)M3508_twisting_pid[3].pidout );				
+			}
 	}
 	
 }

@@ -85,6 +85,7 @@ void gimbal_pid_calc(volatile float *yaw_angle_set,volatile float *pitch_angle_s
 										 const uint8_t yaw_feedback_set)
 {
 	/***** 6020电机双闭环控制 *****/
+	//云台转速 r/min 转为 rad/s
 	yaw_gimbal_motor .angular_speed   = M6020_encoder_yaw .speed_rpm *(2.0f*3.14f/60.0f);
 	pitch_gimbal_motor .angular_speed = M6020_encoder_pitch .speed_rpm *(2.0f*3.14f/60.0f);
 	pluck_motor .angular_speed        = encoder_pluck .speed_rpm *2.0f*3.14f/60.0f;
@@ -127,7 +128,8 @@ void gimbal_pid_calc(volatile float *yaw_angle_set,volatile float *pitch_angle_s
 /***** 云台校准模式（执行一次）得到云台限位角度 *****/
 extern uint8_t chassis_mode , gimbal_mode;
 extern uint8_t Gimbal_Cali_Complete;
-void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,volatile Angle_t *pluck,Encoder_t *encoder_yaw,Encoder_t *encoder_pitch,Encoder_t *encoder_pluck)
+void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,volatile Angle_t *pluck,
+	               Encoder_t *encoder_yaw,Encoder_t *encoder_pitch,Encoder_t *encoder_pluck)
 {
 	static uint16_t cali_time = 0;
 	static uint16_t gimbal_cali_step =1 ;

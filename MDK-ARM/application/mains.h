@@ -4,7 +4,9 @@
 #ifdef __cplusplus
  extern "C" {
 	 #include "gimbal.h"
+	 #include "shoot_task.h"
 	 #include "control_task.h"
+	 #include "keymouse_task.h"
 #endif
 
 #define imca_msg 0

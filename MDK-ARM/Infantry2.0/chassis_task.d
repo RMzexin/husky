@@ -35,6 +35,7 @@ infantry2.0\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ti
 infantry2.0\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry2.0\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\chassis_task.o: application\control_task.h
+infantry2.0\chassis_task.o: application\keymouse_task.h
 infantry2.0\chassis_task.o: ../Inc/can.h
 infantry2.0\chassis_task.o: ../Inc/main.h
 infantry2.0\chassis_task.o: .\algorithm\pid.h
