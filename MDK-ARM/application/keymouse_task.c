@@ -164,11 +164,11 @@ int16_t Pitch_Rotate_Data(void)
 }
 
 //ÓÒ¼üÃé×¼
-bool static Receive = true;
 uint8_t pc_aim()
 {
 	static uint32_t system_runtime;
   static uint32_t last_system_runtime;
+	bool static Receive = true;
   system_runtime = xTaskGetTickCount();
   if(RC_Ctl .mouse .press_right == 1 &&Receive )
 	{
@@ -193,15 +193,12 @@ uint8_t launch()
 	static uint32_t system_runtime;
   static uint32_t last_system_runtime;
   system_runtime = xTaskGetTickCount();
-  if(RC_Ctl .mouse .press_left == 1 &&Receive )
+  if(RC_Ctl .mouse .press_left == 1)
 	{
-		Receive = false;
 		return true;
 	}
-	else if(RC_Ctl .mouse .press_left == 0 && (system_runtime - last_system_runtime >= KEY_JITTER_TIME))
+	else if(RC_Ctl .mouse .press_left == 0)
 	{
-		Receive = true;
-		last_system_runtime = system_runtime ;
 		return false;
 	}
 	else

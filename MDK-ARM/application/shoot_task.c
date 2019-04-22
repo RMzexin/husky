@@ -86,9 +86,9 @@ float pluck_angle_add()
 		{
 			return 0 ;
 		}
-		if(launch_frequency == SLOW_FREQUENCY)
+		if(launch_frequency == HIGH_FREQUENCY)
 		{
-		if(system_runtime - last_system_runtime >= SLOW_FREQUENCY_INTERVAL)
+		if(system_runtime - last_system_runtime >= HIGH_FREQUENCY_INTERVAL)
 			{
 				last_system_runtime = system_runtime ;
 				return 360.0f*PLUCK_RATIO/LATTICE_NUMBER;
@@ -98,9 +98,9 @@ float pluck_angle_add()
 				return 0 ;
 			}
 		}
-		else if(launch_frequency == HIGH_FREQUENCY)
+		else if(launch_frequency == SLOW_FREQUENCY)
 		{
-		if(system_runtime - last_system_runtime >= HIGH_FREQUENCY_INTERVAL)
+		if(system_runtime - last_system_runtime >= SLOW_FREQUENCY_INTERVAL)
 			{
 				last_system_runtime = system_runtime ;
 				return 360.0f*PLUCK_RATIO/LATTICE_NUMBER;

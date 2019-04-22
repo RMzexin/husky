@@ -109,11 +109,11 @@ void Get_2006_Encoder(volatile Encoder_t *v, CAN_HandleTypeDef*_hcan)
   v->given_current = (_hcan->pRxMsg->Data[4]<<8)|_hcan->pRxMsg->Data[5]; 
   v->temperate     = (_hcan->pRxMsg->Data[6]);
 	v->diff = v->ecd - v->last_ecd;
-		if(v->diff < -7500)    //两次编码器的反馈值差别太大，表示圈数发生了改变
+		if(v->diff < -4000)    //两次编码器的反馈值差别太大，表示圈数发生了改变
 	{
 		v->round_cnt++;
 	}
-	else if(v->diff>7500)
+	else if(v->diff>4000)
 	{
 		v->round_cnt--;
 	}		

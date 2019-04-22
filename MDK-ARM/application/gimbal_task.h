@@ -65,8 +65,8 @@
 #define M6020_YAW_ANGLE_MINOUTPUT          -10.0f
 
 //IMU YAW轴 速度环 PID参数（扭腰模式）
-#define IMU_YAW_SPEED_PID_KP             642.0f
-#define IMU_YAW_SPEED_PID_KI               1.4f
+#define IMU_YAW_SPEED_PID_KP             622.0f
+#define IMU_YAW_SPEED_PID_KI               0.0f
 #define IMU_YAW_SPEED_PID_KD               0.0f
 #define IMU_YAW_SPEED_VOLTAFE_MAX       5000.0f
 #define IMU_YAW_SPEED_VOLTAFE_MIN      -5000.0f
@@ -78,8 +78,8 @@
 #define IMU_YAW_ANGLE_PID_KD               0.0f
 #define IMU_YAW_ANGLE_VOLTAFE_MAX       1000.0f
 #define IMU_YAW_ANGLE_VOLTAFE_MIN      -1000.0f
-#define IMU_YAW_ANGLE_MAXOUTPUT           20.0f
-#define IMU_YAW_ANGLE_MINOUTPUT          -20.0f
+#define IMU_YAW_ANGLE_MAXOUTPUT           25.0f
+#define IMU_YAW_ANGLE_MINOUTPUT          -25.0f
 
 
 //6020 PITCH轴 速度环 PID参数

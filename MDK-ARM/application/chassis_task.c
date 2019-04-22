@@ -49,10 +49,10 @@ void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t
 {
 	static float wheel_speed[4];
 	uint8_t i = 0;
-	wheel_speed[0] =  speed_vx + speed_vy  - speed_wz ;
-	wheel_speed[1] = -speed_vx + speed_vy  - speed_wz ;
-	wheel_speed[2] =  speed_vx - speed_vy  - speed_wz ;
-	wheel_speed[3] = -speed_vx - speed_vy  - speed_wz ;
+	wheel_speed[0] =  speed_vx + speed_vy*1.45f - speed_wz ;
+	wheel_speed[1] = -speed_vx + speed_vy*1.45f - speed_wz ;
+	wheel_speed[2] =  speed_vx - speed_vy*1.45f - speed_wz ;
+	wheel_speed[3] = -speed_vx - speed_vy*1.45f - speed_wz ;
 	if(chassis_calc_set == AUTONOMY)
 	{
 		if(control_mode_selection() == KEY_MOUSE_MODE)
@@ -71,10 +71,10 @@ void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t
 				for (i = 0;i < 4; i++ )
 				{
 					PID_Calc(&M3508_motor_speed_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
-				  PIDOUT_LIMIT(M3508_motor_speed_pid[0].pidout,2500.0f,-2500.0f);
-					PIDOUT_LIMIT(M3508_motor_speed_pid[1].pidout,2500.0f,-2500.0f);
-					PIDOUT_LIMIT(M3508_motor_speed_pid[2].pidout,2500.0f,-2500.0f);					
-					PIDOUT_LIMIT(M3508_motor_speed_pid[3].pidout,2500.0f,-2500.0f);
+//				  PIDOUT_LIMIT(M3508_motor_speed_pid[0].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_motor_speed_pid[1].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_motor_speed_pid[2].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_motor_speed_pid[3].pidout,2500.0f,-2500.0f);
 				}
 				Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
 				(int16_t)M3508_motor_speed_pid[1].pidout,
@@ -100,12 +100,12 @@ void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t
 				for (i = 0;i < 4; i++ )
 				{
 					PID_Calc(&M3508_twisting_pid[i],encoder_chassis[i].speed_rpm,wheel_speed[i]);
-					PIDOUT_LIMIT(M3508_twisting_pid[0].pidout,2500.0f,-2500.0f);
-					PIDOUT_LIMIT(M3508_twisting_pid[1].pidout,2500.0f,-2500.0f);
-					PIDOUT_LIMIT(M3508_twisting_pid[2].pidout,2500.0f,-2500.0f);					
-					PIDOUT_LIMIT(M3508_twisting_pid[3].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_twisting_pid[0].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_twisting_pid[1].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_twisting_pid[2].pidout,2500.0f,-2500.0f);
+//					PIDOUT_LIMIT(M3508_twisting_pid[3].pidout,2500.0f,-2500.0f);
 				}				
-				Set_CM_Speed(&hcan1,(int16_t)M3508_motor_speed_pid[0].pidout,
+				Set_CM_Speed(&hcan1,(int16_t)M3508_twisting_pid[0].pidout,
 				(int16_t)M3508_twisting_pid[1].pidout,
 				(int16_t)M3508_twisting_pid[2].pidout,
 				(int16_t)M3508_twisting_pid[3].pidout );				

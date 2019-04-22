@@ -17,7 +17,8 @@
 //小陀螺旋转角度获得
 #define GET_COMPLETE  false
 #define GET_INITIAL   true
-#define TWISTING_INC_FACT   0.7428f  //小陀螺限幅系数
+#define TWISTING_INC_FACT   0.8428f  //小陀螺限幅系数
+#define TWISTING_RAMP_TIME  200
 
 //底盘速度调节
 #define GO_FORWARD_INC_FACT        0.22f //遥控器前进通道系数
@@ -42,11 +43,11 @@ typedef struct
 	float actual_angle;        //实际角度
 	
 	float relative_angle;      //相对角度
-	float yaw_fix_set;         //yaw轴固定角度
+	float yaw_fix_set;         //yaw轴固定相对角度
+	float gimbal_yaw_set;      //yaw轴固定角度
 	float correct_angle;       //修正角度
 	float add_angle;           //跟随时增加的角度
-	
-	
+	float twist_add_angle;           //跟随时增加的角度
 }Angle_t;
  
 //底盘速度结构体定义

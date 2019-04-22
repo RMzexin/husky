@@ -42,7 +42,7 @@ typedef struct
 	
 }IMU_t;
 
-uint8_t Get_IMU_Data(void);
+void Get_IMU_Data(void);
 void IMU_Cali(void);
 uint8_t MPU9250_GetGyro(float *X, float *Y, float *Z);
 uint8_t MPU9250_GetAccel(float *X, float *Y, float *Z);

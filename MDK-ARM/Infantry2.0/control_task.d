@@ -40,5 +40,6 @@ infantry2.0\control_task.o: application\gimbal_task.h
 infantry2.0\control_task.o: application\shoot_task.h
 infantry2.0\control_task.o: application\imu_task.h
 infantry2.0\control_task.o: application\mains.h
+infantry2.0\control_task.o: .\algorithm\ramp.h
 infantry2.0\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 infantry2.0\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

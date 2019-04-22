@@ -29,42 +29,16 @@ Project File Date:  04/05/2019
 *** Warning: Using Microlib and C++ file(s) might cause the linker to fail !
   
 Build target 'Infantry2.0'
-compiling shoot_task.c...
-compiling control_task.c...
-compiling Init_Task.c...
-compiling freertos.c...
-compiling mains.cpp...
-..\RosLibs\std_msgs/Time.h(50): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return "std_msgs/Time"; };
-..\RosLibs\std_msgs/Time.h(51): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "cd7166c74c552c311fbcc2fe5a7bc289"; };
-..\RosLibs\rosserial_msgs/TopicInfo.h(110): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return "rosserial_msgs/TopicInfo"; };
-..\RosLibs\rosserial_msgs/TopicInfo.h(111): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "0ad51f88fc44892f8c10684077646005"; };
-..\RosLibs\rosserial_msgs/TopicInfo.h(116): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\RosLibs\rosserial_msgs/Log.h(53): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return "rosserial_msgs/Log"; };
-..\RosLibs\rosserial_msgs/Log.h(54): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "11abd731c25933261cd6183bd12d6295"; };
-..\RosLibs\rosserial_msgs/RequestParam.h(44): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return REQUESTPARAM; };
-..\RosLibs\rosserial_msgs/RequestParam.h(45): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "c1f3d28f1b044c871e6eff2e9fc3c667"; };
-..\RosLibs\rosserial_msgs/RequestParam.h(172): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return REQUESTPARAM; };
-..\RosLibs\rosserial_msgs/RequestParam.h(173): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "9f0e98bda65981986ddf53afa7a40e49"; };
-..\RosLibs\skyguard_msgs\gimbal.h(98): warning:  #1300-D: getType inherits implicit virtual
-      const char * getType(){ return "skyguard_msgs/gimbal"; };
-..\RosLibs\skyguard_msgs\gimbal.h(99): warning:  #1300-D: getMD5 inherits implicit virtual
-      const char * getMD5(){ return "9ab03bfeddd963aab5c9ffe61a77e11d"; };
-application\mains.cpp: 13 warnings, 0 errors
+compiling imu_task.c...
+application\imu_task.c(66): warning:  #940-D: missing return statement at end of non-void function "MPU9250_GetGyro" 
+  }
+application\imu_task.c(92): warning:  #940-D: missing return statement at end of non-void function "MPU9250_GetAccel" 
+  }
+application\imu_task.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=34928 RO-data=872 RW-data=384 ZI-data=23816  
+Program Size: Code=35012 RO-data=872 RW-data=428 ZI-data=23924  
 FromELF: creating hex file...
-"Infantry2.0\Infantry2.0" - 0 Error(s), 13 Warning(s).
+"Infantry2.0\Infantry2.0" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -87,7 +61,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.1
-Build Time Elapsed:  00:00:14
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>
