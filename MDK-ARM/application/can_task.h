@@ -30,8 +30,10 @@ typedef struct{
 	float   ecd_angle;      //½Ç¶È
 }Encoder_t;
 
+extern uint8_t yaw_can_receive;
+extern uint8_t pitch_can_receive;
+extern uint32_t can_count_reset;
 void my_can_filter_init_recv_all(CAN_HandleTypeDef* _hcan);
-
 void GetEncoderBias  (volatile Encoder_t *v, CAN_HandleTypeDef * msg);
 void Get_3508_Encoder(volatile Encoder_t *v, CAN_HandleTypeDef * msg);
 void Get_6020_Encoder(volatile Encoder_t *v, CAN_HandleTypeDef * msg);

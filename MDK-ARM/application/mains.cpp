@@ -43,12 +43,36 @@ skyguard_msgs::gimbal gimbalctr_rec;
 ros::Subscriber<skyguard_msgs::gimbal> gimbalctr("gimbalctr", gimbal_callback);
 //ros::Publisher gimbal_position("position", &gimbal_pos);
 
+extern uint8_t pc_aim_launch;
 void gimbal_callback( const skyguard_msgs::gimbal& rxbuff)
 {		
+	static int movement = 1;
 	if(pc_aim())
 	{
     gimbalctr_rec = rxbuff;
-	  gimbal_PC_correct(&gimbalctr_rec.yaw,&gimbalctr_rec.pitch);
+		int yaw = gimbalctr_rec.yaw;
+		int pitch = gimbalctr_rec.pitch;
+		bool yaw_direction = yaw > 0;
+		bool pitch_direction = pitch > 0;
+		int yaw_movement = yaw_direction ? movement : -movement; 
+		int pitch_movement = pitch_direction ? movement : -movement;
+		
+		while(!(yaw == 0 &&pitch == 0))
+		{
+			if(yaw == 0)
+			{
+				yaw_movement = 0;
+			}
+			if(pitch == 0)
+			{
+				pitch_movement = 0;
+			}
+			yaw -= yaw_movement;
+			pitch -= pitch_movement;
+			gimbal_PC_correct(&yaw_movement,&pitch_movement);
+			vTaskDelay(10);
+		}
+      pc_aim_launch = 1;
 	}
 }
 

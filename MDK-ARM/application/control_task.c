@@ -7,6 +7,9 @@
 #include "imu_task.h"
 #include "mains.h"
 #include "ramp.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include <arm_math.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -22,6 +25,7 @@ chassis_speed_t chassis_speed;
 
 uint8_t chassis_mode , gimbal_mode;
 volatile const uint8_t Gimbal_Cali_Complete = 0 ;
+volatile const uint16_t gimbal_cali_step =1 ;
 
 ramp_t Tw_left_ramp    = RAMP_GEN_DAFAULT;
 ramp_t Tw_right_ramp   = RAMP_GEN_DAFAULT;
@@ -46,6 +50,7 @@ ramp_t Tw_right_ramp   = RAMP_GEN_DAFAULT;
 }
 
 //放在大循环里
+uint8_t mode_indicator_light = 0;
 void gimbal_change(void)
 {
 	if(Gimbal_Cali_Complete)
@@ -68,6 +73,7 @@ void gimbal_change(void)
 					M6020_yaw_angle .angle_set   -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT;
 					ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min ) ;
 					//云台 底盘模式标志位，执行云台与底盘分离运动
+					mode_indicator_light = 16;
 					chassis_mode = CHASSIS_AUTONOMY;
 					gimbal_mode  = GIMBAL_ENCODER;
 					chassis_behavior();break;
@@ -81,10 +87,11 @@ void gimbal_change(void)
 					M6020_pitch_angle .angle_set += Pitch_Rotate_Data() * PITCH_ROTATE_INC_FACT;
 					ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min ) ;
 					//陀螺仪偏移设定角度，云台角度限制
-					M6020_yaw_angle .add_angle   -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT;
+					M6020_yaw_angle .add_angle   -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT + twisting_Data()* GIMBAL_TWIST_INC_FACT;
 					M6020_yaw_angle .angle_set = Correct_Angle_Feedback();
 					ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min ) ;
 					//云台 底盘模式标志位，执行云台与底盘跟随运动
+					mode_indicator_light = 32;
 					chassis_mode = CHASSIS_FOLLOWING;
 					gimbal_mode  = GIMBAL_ENCODER ;
 					chassis_behavior();break;
@@ -96,11 +103,12 @@ void gimbal_change(void)
 					M6020_pitch_angle .angle_set += Pitch_Rotate_Data() * PITCH_ROTATE_INC_FACT;
 					ANGLE_LIMIT(M6020_pitch_angle .angle_set,M6020_pitch_angle .angle_limit .max ,M6020_pitch_angle .angle_limit .min);
 					//当陀螺仪偏移设定角度，云台修正角度
-					M6020_yaw_angle .add_angle       -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT;
-					M6020_yaw_angle .twist_add_angle -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT;
+					M6020_yaw_angle .add_angle       -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT + twisting_Data()* GIMBAL_TWIST_INC_FACT;
+					M6020_yaw_angle .twist_add_angle -= Yaw_Rotate_Data() * YAW_ROTATE_INC_FACT + twisting_Data()* GIMBAL_TWIST_INC_FACT;
 					M6020_yaw_angle .angle_set = Correct_Angle_Feedback();
 					ANGLE_LIMIT(M6020_yaw_angle .angle_set,M6020_yaw_angle .angle_limit .max ,M6020_yaw_angle .angle_limit .min);
 					//云台 底盘模式标志位，执行云台固定 底盘扭腰运动
+					mode_indicator_light = 64;
 					chassis_mode = CHASSIS_TWISTING;
 					gimbal_mode  = GIMBAL_IMU ;
 					chassis_behavior();break;
@@ -111,6 +119,8 @@ void gimbal_change(void)
 	{
 		//云台校准 角度初始化
 		gimbal_cali(&M6020_pitch_angle ,&M6020_yaw_angle,&M2006_angle,&M6020_encoder_yaw ,&M6020_encoder_pitch,&encoder_pluck);
+		chassis_mode = CHASSIS_DEFAULT;
+		chassis_behavior();
 	}	
 }
 //PC角度修正(放在ROS通信回调函数中）
@@ -133,17 +143,18 @@ float Correct_Angle_Feedback()
 {
 	if(CHOICE_MODE() == AUTONOMY || CHOICE_MODE() == FOLLOWING )
 	{
-	return  (M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle)\
-		     -(IMU_chassis.C_yaw - M6020_yaw_angle.yaw_fix_set)           \
-	       +M6020_yaw_angle .add_angle;
+		return (M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle)\
+		      -(IMU_chassis.C_yaw - M6020_yaw_angle.yaw_fix_set)           \
+	        +(M6020_yaw_angle .add_angle);
 	}
 	else if(CHOICE_MODE() ==TWISTING)
 	{
-	return  (M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle)                           \
-		     -(IMU_chassis.C_yaw - M6020_yaw_angle.yaw_fix_set)                                      \
-	       +M6020_yaw_angle .add_angle                                                             \
-	       -(M6020_yaw_angle.gimbal_yaw_set - M6020_yaw_angle .twist_add_angle - IMU_gimbal .C_yaw ) *0.5f ;
-	}                          
+		return  (M6020_yaw_angle.yaw_fix_set+M6020_yaw_angle.relative_angle)                           \
+		       -(IMU_chassis.C_yaw - M6020_yaw_angle.yaw_fix_set)                                      \
+	         +(M6020_yaw_angle .add_angle );                                                          \
+//	         -(M6020_yaw_angle.gimbal_yaw_set - M6020_yaw_angle .twist_add_angle - IMU_gimbal .C_yaw ) *0.37f ;
+	}
+ else return 0;	
 }
 
 //放在大循环里
@@ -160,8 +171,8 @@ void chassis_behavior()
 			ramp_init(&Tw_right_ramp,TWISTING_RAMP_TIME );
 			//控制底盘前后平移，左右转弯；左拨杆控制云台
 			chassis_speed .vx = Go_Forward_Data()* GO_FORWARD_INC_FACT ;
-		  chassis_speed .vy = 0.0f ;
-		  chassis_speed .wz = -Left_Right_Data()* LEFT_RIGHT_INC_FACT;
+		  chassis_speed .vy = Left_Right_Data()* LEFT_RIGHT_INC_FACT ;
+		  chassis_speed .wz = -twisting_Data()  * CHASSIS_TWIST_INC_FACT;
 			chassis_mode_calc_set = AUTONOMY ;break;
 		}
 		case CHASSIS_FOLLOWING :
@@ -223,11 +234,23 @@ void chassis_behavior()
 static uint8_t yaw_angle_feedback_set;
 uint8_t gimbal_set()
 {
+	static uint32_t system_runtime;
+  static uint32_t last_system_runtime;
+  system_runtime = xTaskGetTickCount();
 	//判断拨弹轮电机是否堵转
-	if(M2006_angle .angle_set - M2006_angle .actual_angle < 1000.0f)
-	{
-		M2006_angle .angle_set += pluck_angle_add();
-	}
+	if(fabs(M2006_angle .angle_set - encoder_pluck .ecd_angle)>1600.0f && (system_runtime-last_system_runtime)>1500)
+		{
+			last_system_runtime = system_runtime;
+			M2006_angle .angle_set -=2400.0f;
+		}
+		else if(fabs(M2006_angle .angle_set - encoder_pluck .ecd_angle)< 1600.0f)
+		{
+			M2006_angle .angle_set += pluck_angle_add();
+		}
+		else if(fabs(M2006_angle .angle_set - encoder_pluck .ecd_angle)>4000.0f)
+		{
+			M2006_angle .angle_set = encoder_pluck .ecd_angle;
+		}
 	switch ( gimbal_mode )
 	{
 		case GIMBAL_ENCODER :

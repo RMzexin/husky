@@ -6,6 +6,9 @@
 #define REMOTE_CONTROL_MODE   1
 #define KEY_MOUSE_MODE        2
 
+#define reset        1
+#define normal       0
+
 #define KEY_V		  0x4000
 #define KEY_C		  0x2000
 #define KEY_X		  0x1000
@@ -25,14 +28,17 @@
 #define KEY_JITTER_TIME         100
 
 //加速斜坡时间
-#define TRANSLATION_RAMP_TIME         1500
+#define TRANSLATION_RAMP_TIME          800
+#define CONTROL_TWIST_RAMP_TIME        800
 //W S A D 原始值
 #define FORWARD_PARAMETERS             540
 #define BACKOFF_PARAMETERS            -540
 #define LEFTSHIFT_PARAMETERS          -440
 #define RIGHTSHIFT_PARAMETERS          440
+#define LEFTTWIST_PARAMETERS          -440
+#define RIGHTTWIST_PARAMETERS          440
 //加速
-#define SHIFT_INC_FACT                1.55
+#define SHIFT_INC_FACT                1.75
 //鼠标移动灵敏度
 #define MOUSE_YAW_INC_FACT            10
 #define MOUSE_PITCH_INC_FACT         -10
@@ -41,10 +47,12 @@
 
 
 uint8_t control_mode_selection(void);
+uint8_t Resurrection_reset(void);
 uint8_t CHOICE_MODE(void);
 uint8_t FRICTION_WHEEL_MODE(void);
 int16_t Go_Forward_Data(void);
 int16_t Left_Right_Data(void);
+int16_t twisting_Data(void);
 int16_t Yaw_Rotate_Data(void);
 int16_t Pitch_Rotate_Data(void);
 uint8_t pc_aim(void);

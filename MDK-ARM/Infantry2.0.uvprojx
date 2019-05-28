@@ -471,6 +471,11 @@
               <FileType>8</FileType>
               <FilePath>.\application\mains.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Driver_Judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\application\Driver_Judge.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -58,13 +58,15 @@
 /* USER CODE BEGIN Includes */     
 #include "can.h"
 #include "mains.h"
-#include "can_task.h"
+#include "usart.h"
 #include "inv_mpu.h"
+#include "can_task.h"
 #include "imu_task.h"
 #include "Init_Task.h"
 #include "print_task.h"
-#include "gimbal_task.h"
 #include "shoot_task.h"
+#include "gimbal_task.h"
+#include "keymouse_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,7 +81,8 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+extern uint16_t gimbal_cali_step;
+extern uint8_t Gimbal_Cali_Complete;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -170,10 +173,13 @@ void StartInitTask(void const * argument)
 
   /* USER CODE BEGIN StartInitTask */
   /* Infinite loop */
+			//云台、底盘参数初始化任务都在这
+//	SETUP();
+	my_can_filter_init_recv_all(&hcan1);     //配置CAN过滤器
+	HAL_CAN_Receive_IT(&hcan1, CAN_FIFO0);   //启动CAN接收中断
+	while(!yaw_can_receive || !pitch_can_receive)
 		bsp_init ();
-		my_can_filter_init_recv_all(&hcan1);     //配置CAN过滤器
-		HAL_CAN_Receive_IT(&hcan1, CAN_FIFO0);   //启动CAN接收中断
-	  osTimerStart(CanTimerSendHandle, 1);
+		osTimerStart(CanTimerSendHandle, 1);
 		vTaskDelete (InitTaskHandle);
   /* USER CODE END StartInitTask */
 }
@@ -191,8 +197,19 @@ void StartControlTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-//		loop();
-		gimbal_change();
+//    loop();
+		if(Resurrection_reset())
+			{
+				gimbal_cali_step = GIMBAL_CALI_YAW_MAX_STEP;
+				Gimbal_Cali_Complete = 0;
+				can_count_reset = 0;
+				yaw_can_receive = 0;
+				pitch_can_receive = 0;
+			}
+			if(yaw_can_receive && pitch_can_receive )
+			{
+				gimbal_change();
+			}
     vTaskDelay (1);
   }
   /* USER CODE END StartControlTask */
@@ -214,6 +231,7 @@ void StartIMUTask(void const * argument)
   {
     CurrentControlTick = xTaskGetTickCount();
     Get_IMU_Data();
+//		shanwai_sprintf();
     vTaskDelayUntil(&CurrentControlTick, 5 / portTICK_RATE_MS);
   }
   /* USER CODE END StartIMUTask */
@@ -232,8 +250,8 @@ void StartShootTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+		//摩擦轮、拨弹轮控制
 		shoot_mode();
-		shanwai_sprintf();
 		vTaskDelay (2);
   }
   /* USER CODE END StartShootTask */
@@ -243,6 +261,7 @@ void StartShootTask(void const * argument)
 void CanTimerSendCallback(void const * argument)
 {
   /* USER CODE BEGIN CanTimerSendCallback */
+	//软件定时器，写入电机电流值（1ms执行一次）
   GIMBAL_CAN_SEND();
   /* USER CODE END CanTimerSendCallback */
 }

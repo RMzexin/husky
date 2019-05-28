@@ -35,6 +35,8 @@ infantry2.0\shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_
 infantry2.0\shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\shoot_task.o: application\keymouse_task.h
 infantry2.0\shoot_task.o: application\remote_task.h
+infantry2.0\shoot_task.o: application\Driver_Judge.h
+infantry2.0\shoot_task.o: application\CommonDataStructure.h
 infantry2.0\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 infantry2.0\shoot_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 infantry2.0\shoot_task.o: ../Inc/FreeRTOSConfig.h
@@ -48,3 +50,4 @@ infantry2.0\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/lis
 infantry2.0\shoot_task.o: .\algorithm\ramp.h
 infantry2.0\shoot_task.o: ../Inc/tim.h
 infantry2.0\shoot_task.o: ../Inc/main.h
+infantry2.0\shoot_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

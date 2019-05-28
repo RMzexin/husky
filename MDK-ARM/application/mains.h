@@ -3,6 +3,8 @@
 
 #ifdef __cplusplus
  extern "C" {
+	 #include "FreeRTOS.h"
+	 #include "task.h"
 	 #include "gimbal.h"
 	 #include "shoot_task.h"
 	 #include "control_task.h"

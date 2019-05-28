@@ -14,9 +14,9 @@ unsigned char gimbal_chrTemp[30];
 
 void Get_IMU_Data()
 {	
-	IICreadBytes(0x51,AX,24,&gimbal_chrTemp[0]);
 	IICreadBytes(0x50,AX,24,&chassis_chrTemp[0]);
-	if(gimbal_chrTemp[22]!= 0x00)
+//	IICreadBytes(0x50,AX,24,&gimbal_chrTemp[0]);
+	if(gimbal_chrTemp[22]!= 0x00 && gimbal_chrTemp[22]!= 0xff)
 		{
 			IMU_gimbal .last_yaw = IMU_gimbal .ecd_yaw;
 			IMU_gimbal .ecd_yaw  = (float)CharToShort(&gimbal_chrTemp[22])/32768*180.0f;
@@ -26,7 +26,7 @@ void Get_IMU_Data()
 				IMU_gimbal .round_cnt --;
 			IMU_gimbal .C_yaw =-(IMU_gimbal .ecd_yaw + IMU_gimbal .round_cnt*360.0f);
 		}
-	if(chassis_chrTemp[22]!= 0x00)
+	if(chassis_chrTemp[22]!= 0x00 && chassis_chrTemp[22]!= 0xff && chassis_chrTemp[23]!= 0x00 && chassis_chrTemp[23]!= 0xff)
 		{
 			IMU_chassis .last_yaw = IMU_chassis .ecd_yaw;
 			IMU_chassis .ecd_yaw  = (float)CharToShort(&chassis_chrTemp[22])/32768*180.0f;
@@ -38,7 +38,7 @@ void Get_IMU_Data()
 		}
 		Correct_Angle_Feedback();
 }
-
+//以上才是有用的，下面是之前解算mpu9250用的，还是建议你们用现成的解算模块
 /**
   * @brief  获取mpu9250角速度
   * @param  X轴角速度存储地址
@@ -61,7 +61,7 @@ uint8_t MPU9250_GetGyro(float *X, float *Y, float *Z)
 //        *Y = 0.0610352F * IMU_data.gyro[1];
 //        *Z = 0.0610352F * IMU_data.gyro[2];
 //        
-//        return 0;
+        return 0;
 //    }
 }
 
@@ -87,7 +87,7 @@ uint8_t MPU9250_GetAccel(float *X, float *Y, float *Z)
 //        *Y = 2 * Acceleration_Of_Gravity * IMU_data.acc[1] / 32768;
 //        *Z = 2 * Acceleration_Of_Gravity * IMU_data.acc[2] / 32768;
 //        
-//        return 0;
+       return 0;
 //    }
 }
 

@@ -2,7 +2,10 @@
 #include "can_task.h"
 #include "cmsis_os.h"
 
+uint8_t yaw_can_receive = 0;
+uint8_t pitch_can_receive = 0;
 static uint32_t can_count = 0;
+uint32_t can_count_reset = 0;
 volatile Encoder_t M6623_encoder_yaw={0}, M6623_encoder_pitch={0},M6020_encoder_yaw={0}, M6020_encoder_pitch={0},
                    encoder_pluck={0}, encoder_chassis[4]={0}; 
 
@@ -156,7 +159,8 @@ uint32_t FlashTimer;
  *******************************************************************************************/
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* _hcan)
 {
-   can_count++;
+	can_count++;
+	can_count_reset++;
 	if(HAL_GetTick() - FlashTimer>500){
 		FlashTimer = HAL_GetTick();	
 	}
@@ -176,11 +180,13 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* _hcan)
 			}break;
 		case CAN_YAW_MOTOR_ID:
 			{
-			  (can_count<=50) ? GetEncoderBias(&M6623_encoder_yaw ,_hcan):Get_6020_Encoder(&M6020_encoder_yaw ,_hcan);				
+			  (can_count<=50) ? GetEncoderBias(&M6623_encoder_yaw ,_hcan):Get_6020_Encoder(&M6020_encoder_yaw ,_hcan);
+        if(can_count_reset>=50) {yaw_can_receive = 1;}				
 			}break;
 		case CAN_PITCH_MOTOR_ID:
 			{
 				(can_count<=50) ? GetEncoderBias(&M6623_encoder_pitch ,_hcan):Get_6020_Encoder(&M6020_encoder_pitch ,_hcan);
+				if(can_count_reset>=50) {pitch_can_receive = 1;}
 			}break;	
 		case CAN_PLUCK_MOTOR_ID:
 			{

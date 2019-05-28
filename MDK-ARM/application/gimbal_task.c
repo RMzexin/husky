@@ -127,51 +127,51 @@ void gimbal_pid_calc(volatile float *yaw_angle_set,volatile float *pitch_angle_s
 }	
 /***** 云台校准模式（执行一次）得到云台限位角度 *****/
 extern uint8_t chassis_mode , gimbal_mode;
+extern uint16_t gimbal_cali_step;
 extern uint8_t Gimbal_Cali_Complete;
 void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,volatile Angle_t *pluck,
 	               Encoder_t *encoder_yaw,Encoder_t *encoder_pitch,Encoder_t *encoder_pluck)
 {
 	static uint16_t cali_time = 0;
-	static uint16_t gimbal_cali_step =1 ;
 	if(gimbal_cali_step == GIMBAL_CALI_YAW_MAX_STEP)
 		{
-			yaw ->angle_limit.last_angle  = encoder_yaw ->ecd_angle;
 			can_send .yaw_cali    = GIMBAL_CALI_MOTOR_SET ;
 			can_send .pitch_cali  = 0 ;
 			can_send .pluck_cali  = 0 ;
 			can_send_mode = GIMBAL_CALI ;
 			GIMBAL_CALI_CALCULATE(yaw ->angle_limit.last_angle , cali_time ,
 			encoder_yaw ->ecd_angle , yaw ->angle_limit.max  , gimbal_cali_step);
+			yaw ->angle_limit.last_angle  = encoder_yaw ->ecd_angle;
 		}
 		else if(gimbal_cali_step == GIMBAL_CALI_YAW_MIN_STEP)
 			{
-				yaw ->angle_limit. last_angle = encoder_yaw ->ecd_angle;
 			  can_send .yaw_cali    = -GIMBAL_CALI_MOTOR_SET ;
 			  can_send .pitch_cali  = 0 ;
 			  can_send .pluck_cali  = 0 ;
 				can_send_mode = GIMBAL_CALI ;
 				GIMBAL_CALI_CALCULATE(yaw ->angle_limit. last_angle , cali_time ,
 				encoder_yaw ->ecd_angle , yaw ->angle_limit. min  , gimbal_cali_step);
+				yaw ->angle_limit. last_angle = encoder_yaw ->ecd_angle;
 			}
 			else if(gimbal_cali_step == GIMBAL_CALI_PITCH_MAX_STEP)
 				{
-					pitch ->angle_limit. last_angle = encoder_pitch ->ecd_angle;
 					can_send .yaw_cali    = 0 ;
 					can_send .pitch_cali  = GIMBAL_CALI_MOTOR_SET ;
 					can_send .pluck_cali  = 0 ;
 					can_send_mode = GIMBAL_CALI ;
 					GIMBAL_CALI_CALCULATE(pitch ->angle_limit. last_angle , cali_time ,
 					encoder_pitch ->ecd_angle , pitch ->angle_limit. max , gimbal_cali_step);
+					pitch ->angle_limit. last_angle = encoder_pitch ->ecd_angle;
 				}
 				else if(gimbal_cali_step == GIMBAL_CALI_PITCH_MIN_STEP)
 					{
-						pitch ->angle_limit. last_angle = encoder_pitch ->ecd_angle;
 						can_send .yaw_cali    = 0 ;
 						can_send .pitch_cali  = -GIMBAL_CALI_MOTOR_SET ;
 						can_send .pluck_cali  = 0 ;
 						can_send_mode = GIMBAL_CALI ;
 						GIMBAL_CALI_CALCULATE(pitch ->angle_limit. last_angle , cali_time ,
 						encoder_pitch ->ecd_angle , pitch ->angle_limit. min  , gimbal_cali_step);
+						pitch ->angle_limit. last_angle = encoder_pitch ->ecd_angle;
 					}
 					else if(gimbal_cali_step == GIMBAL_CALI_END_STEP)
 						{
@@ -181,7 +181,8 @@ void gimbal_cali(volatile Angle_t *pitch,volatile Angle_t *yaw,volatile Angle_t 
 							yaw   ->angle_set = yaw   ->angle_limit .middle  ;
 							pluck ->angle_set = encoder_pluck ->ecd_angle ;
 							can_send_mode = GIMBAL_NORMAL ;
-							gimbal_mode = GIMBAL_ENCODER ; 
+							gimbal_mode
+							= GIMBAL_ENCODER ; 
 							Gimbal_Cali_Complete ++ ;
 						}
 }

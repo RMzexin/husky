@@ -13,6 +13,5 @@ void bsp_init (void)
 	gimbal_init();
 	chassis_init();
 	shoot_init();
-//	SETUP();
 }
 

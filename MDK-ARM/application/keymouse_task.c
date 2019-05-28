@@ -10,6 +10,9 @@ ramp_t Km_forward_ramp    = RAMP_GEN_DAFAULT;
 ramp_t Km_backoff_ramp    = RAMP_GEN_DAFAULT;
 ramp_t Km_leftshift_ramp  = RAMP_GEN_DAFAULT;
 ramp_t Km_rightshift_ramp = RAMP_GEN_DAFAULT;
+ramp_t Km_lefttwist_ramp  = RAMP_GEN_DAFAULT;
+ramp_t Km_righttwist_ramp = RAMP_GEN_DAFAULT;
+
 
 uint8_t control_mode_selection()
 {
@@ -21,6 +24,18 @@ uint8_t control_mode_selection()
 		return REMOTE_CONTROL_MODE;
 }
 
+bool static press_reset = true;
+uint8_t Resurrection_reset()
+{
+		if(RC_Ctl.switch_right == 2&&RC_Ctl.switch_left == 2 && press_reset)
+	{
+		press_reset = false ;
+		return reset ;
+	}
+	else 
+		press_reset = true;
+		return normal ;
+}
 
 uint8_t CHOICE_MODE(void)
 {
@@ -137,6 +152,40 @@ int16_t Left_Right_Data(void)
 	return 0 ;
 }
 
+int16_t twisting_Data(void)
+{
+	if(control_mode_selection() == KEY_MOUSE_MODE)
+	{
+		if(judge_key_press(KEY_Q)&&judge_key_unpress(KEY_SHIFT))
+		{
+			ramp_init(&Km_righttwist_ramp, CONTROL_TWIST_RAMP_TIME);
+			return LEFTTWIST_PARAMETERS* ramp_calc(&Km_lefttwist_ramp);
+		}
+		else if(judge_key_press(KEY_E)&&judge_key_unpress(KEY_SHIFT))
+		{
+			ramp_init(&Km_lefttwist_ramp, CONTROL_TWIST_RAMP_TIME);
+			return RIGHTTWIST_PARAMETERS* ramp_calc(&Km_righttwist_ramp);
+		}
+		else if(judge_key_press(KEY_Q)&&judge_key_press(KEY_SHIFT))
+		{
+			ramp_init(&Km_righttwist_ramp, CONTROL_TWIST_RAMP_TIME);
+			return LEFTTWIST_PARAMETERS*SHIFT_INC_FACT* ramp_calc(&Km_lefttwist_ramp);
+		}
+		else if(judge_key_press(KEY_E)&&judge_key_press(KEY_SHIFT))
+		{
+			ramp_init(&Km_lefttwist_ramp, CONTROL_TWIST_RAMP_TIME);
+			return RIGHTTWIST_PARAMETERS*SHIFT_INC_FACT* ramp_calc(&Km_righttwist_ramp);
+		}
+		else 
+		{
+			ramp_init(&Km_lefttwist_ramp , CONTROL_TWIST_RAMP_TIME),
+			ramp_init(&Km_righttwist_ramp, CONTROL_TWIST_RAMP_TIME);
+			return 0 ;
+		}
+	}
+	return 0 ;
+}
+
 int16_t Yaw_Rotate_Data(void)
 {
 	if(control_mode_selection() == REMOTE_CONTROL_MODE)
@@ -190,21 +239,30 @@ uint8_t pc_aim()
 //左键发射
 uint8_t launch()
 {
-	static uint32_t system_runtime;
-  static uint32_t last_system_runtime;
-  system_runtime = xTaskGetTickCount();
-  if(RC_Ctl .mouse .press_left == 1)
+		if(control_mode_selection() == KEY_MOUSE_MODE)
 	{
-		return true;
+		if(RC_Ctl .mouse .press_left == 1)
+			{
+				return true;
+			}
+		else if(RC_Ctl .mouse .press_left == 0)
+			{
+				return false;
+			}
+		else
+			{
+				return false;
+			}
 	}
-	else if(RC_Ctl .mouse .press_left == 0)
+	else if(control_mode_selection() == REMOTE_CONTROL_MODE)
 	{
-		return false;
-	}
-	else
-	{
-		return false;
-	}	
+		if(RC_Ctl.switch_left == 1 || RC_Ctl.switch_left == 3)
+		{
+			return false;
+		}
+		else if(RC_Ctl.switch_left == 2)
+			return true;
+	}		
 }
 
 //射速调节
@@ -215,14 +273,32 @@ uint8_t firing_tate()
   static uint32_t last_system_runtime;
 	static uint8_t  shooting_mode = 1;
   system_runtime = xTaskGetTickCount();
-	if(judge_key_press(KEY_Q) && (system_runtime - last_system_runtime >= FIRING_TATE_TIME))
+	if(control_mode_selection() == KEY_MOUSE_MODE)
 	{
-		if(increase) shooting_mode++;
-		else         shooting_mode--;
+		if(judge_key_press(KEY_C) && (system_runtime - last_system_runtime >= FIRING_TATE_TIME))
+			{
+				if(shooting_mode == 2||shooting_mode == 1)      increase = true;
+				else if(shooting_mode == 3)                     increase = false;
 		
-		if(shooting_mode == 2)      increase = true;
-		else if(shooting_mode == 3) increase = false;
-		last_system_runtime = system_runtime ;	
+				if(increase) shooting_mode++;
+				else         shooting_mode--;
+				last_system_runtime = system_runtime ;	
+			}
+			else if(judge_key_press(KEY_V))
+				{
+					shooting_mode = 1;
+				}
+	}
+	else if(control_mode_selection() == REMOTE_CONTROL_MODE)
+	{
+		if(RC_Ctl.switch_left == 3 || RC_Ctl.switch_left == 2)
+		{
+			shooting_mode = 2;	
+		}
+		if(RC_Ctl.switch_left == 1)
+		{
+			shooting_mode = 1;	
+		}
 	}
 	return shooting_mode;
 }

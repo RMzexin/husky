@@ -50,3 +50,5 @@ infantry2.0\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/q
 infantry2.0\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 infantry2.0\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 infantry2.0\stm32f4xx_it.o: ../Inc/usart.h
+infantry2.0\stm32f4xx_it.o: .\application\Driver_Judge.h
+infantry2.0\stm32f4xx_it.o: .\application\CommonDataStructure.h

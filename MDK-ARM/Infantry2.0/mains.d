@@ -52,6 +52,16 @@ infantry2.0\mains.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 infantry2.0\mains.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry2.0\mains.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry2.0\mains.o: application\mains.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+infantry2.0\mains.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+infantry2.0\mains.o: ../Inc/FreeRTOSConfig.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+infantry2.0\mains.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 infantry2.0\mains.o: ..\RosLibs\skyguard_msgs\gimbal.h
 infantry2.0\mains.o: application\shoot_task.h
 infantry2.0\mains.o: application\control_task.h

@@ -39,6 +39,8 @@
 #define CHASSIS_FOLLOWING_CORRECT_MAXOUTPUT       110.0f
 #define CHASSIS_FOLLOWING_CORRECT_MINOUTPUT      -110.0f
 
+#define OUTPUT_LIMIT   3000.0f
+
 
 void chassis_init(void);
 void chassis_pid_calc(float speed_vx,float speed_vy,float speed_wz,const uint8_t chassis_calc_set);

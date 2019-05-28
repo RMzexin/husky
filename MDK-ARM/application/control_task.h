@@ -8,6 +8,7 @@
 #define FOLLOWING  3
 #define TWISTING   2
 //底盘模式切换
+#define CHASSIS_DEFAULT    0
 #define CHASSIS_AUTONOMY   1
 #define CHASSIS_FOLLOWING  2
 #define CHASSIS_TWISTING   3
@@ -21,11 +22,13 @@
 #define TWISTING_RAMP_TIME  200
 
 //底盘速度调节
-#define GO_FORWARD_INC_FACT        0.22f //遥控器前进通道系数
-#define LEFT_RIGHT_INC_FACT        0.22f //遥控器平移通道系数
+#define GO_FORWARD_INC_FACT        0.35f //前进通道系数
+#define LEFT_RIGHT_INC_FACT        0.28f //平移通道系数
+#define CHASSIS_TWIST_INC_FACT     0.22f //旋转通道系数
 //云台灵敏度调节
-#define YAW_ROTATE_INC_FACT    0.00028f //遥控器云台yaw通道系数
-#define PITCH_ROTATE_INC_FACT  0.00028f //遥控器云台pitch通道系数
+#define YAW_ROTATE_INC_FACT    0.00028f //云台yaw通道系数
+#define PITCH_ROTATE_INC_FACT  0.00028f //云台pitch通道系数
+#define GIMBAL_TWIST_INC_FACT  0.00035f //云台旋转通道系数
 
 //云台角度结构体定义
 typedef struct 
@@ -57,6 +60,8 @@ typedef struct
 	float vy;
 	float wz;
 }chassis_speed_t;
+
+extern uint8_t mode_indicator_light;
 
 void gimbal_change(void);
 void chassis_behavior(void);

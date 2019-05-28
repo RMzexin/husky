@@ -6,7 +6,7 @@
 #include "imu_task.h"
 #include "can_task.h"
 #include "pid.h"
-
+//串口3是配置成DMA，这块可能使用不正常，得做修改
 extern Encoder_t M6020_encoder_yaw,M6020_encoder_pitch,
                  encoder_pluck;
 extern Angle_t M6020_pitch_angle ,M6020_yaw_angle,M2006_angle,chassis_angle;

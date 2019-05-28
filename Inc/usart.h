@@ -57,6 +57,13 @@
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
+	 /* DMA接收长度宏定义 */
+#define BUFFER_SIZE 150
+extern uint8_t rx_buffer[];
+extern uint8_t tx_buffer[];
+extern uint8_t recv_end_flag;
+extern uint16_t rx_len;
+	 
 HAL_StatusTypeDef UART_Receive_DMA_NoIT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UART_Receive_IT_IDLE(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 void HAL_UART_IDLE_IRQHandler(UART_HandleTypeDef *huart);

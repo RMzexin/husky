@@ -48,7 +48,7 @@
 
 
 //6020 YAW轴 速度环 PID参数（跟随模式）
-#define M6020_YAW_SPEED_PID_KP            1822.0f
+#define M6020_YAW_SPEED_PID_KP            1522.0f
 #define M6020_YAW_SPEED_PID_KI               2.0f
 #define M6020_YAW_SPEED_PID_KD               0.0f
 #define M6020_YAW_SPEED_VOLTAFE_MAX       5000.0f
@@ -146,8 +146,8 @@ typedef struct
 #define IMU_FEEDBACK     2
 
 //云台校准中值的时候，发送原始电流值
-#define GIMBAL_CALI_MOTOR_SET 6000
-#define GIMBAL_CALI_STEP_TIME 1000
+#define GIMBAL_CALI_MOTOR_SET 7000
+#define GIMBAL_CALI_STEP_TIME 500
 #define GIMBAL_CALI_GYRO_LIMIT 0.1f
 
 #define GIMBAL_CALI_YAW_MAX_STEP 1

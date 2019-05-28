@@ -63,6 +63,7 @@
 #include "inv_mpu.h"
 #include "Init_Task.h"
 #include "gimbal_task.h"
+#include "Driver_Judge.h"
 #include "control_task.h"
 /* USER CODE END Includes */
 
@@ -136,10 +137,16 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+	HAL_TIM_Base_Start_IT(&htim2);
 	HAL_TIM_Base_Start_IT(&htim3);
 	HAL_TIM_Base_Start_IT(&htim5);
 	HAL_UART_Receive_IT_IDLE(&huart2,UART_Buffer,100);
+		/*开启串口空闲中断*/
+	__HAL_UART_ENABLE_IT(&huart3, UART_IT_IDLE);
+	/*启动串口DMA接收*/
+	HAL_UART_Receive_DMA(&huart3,rx_buffer,BUFFER_SIZE);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -224,6 +231,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
+	if (htim->Instance == TIM2) {
+		send_out_103_data_set();
+	}
   if (htim->Instance == TIM3) {
     gimbal_set();
   }

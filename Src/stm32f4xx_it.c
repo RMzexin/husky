@@ -39,6 +39,9 @@
 #include "cmsis_os.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "usart.h"
+#include "Driver_Judge.h"
+#include "commondatastructure.h" //用于16进制转换小数
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,7 +61,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+FloatTrans  FT;
+Uint16Trans UT;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,12 +77,15 @@
 
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart2_rx;
+extern DMA_HandleTypeDef hdma_usart3_rx;
+extern DMA_HandleTypeDef hdma_usart3_tx;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
@@ -185,6 +192,34 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 stream1 global interrupt.
+  */
+void DMA1_Stream1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart3_rx);
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 stream3 global interrupt.
+  */
+void DMA1_Stream3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart3_tx);
+  /* USER CODE BEGIN DMA1_Stream3_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream3_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA1 stream5 global interrupt.
   */
 void DMA1_Stream5_IRQHandler(void)
@@ -224,6 +259,20 @@ void CAN1_RX0_IRQHandler(void)
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
 
   /* USER CODE END CAN1_RX0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**
@@ -289,11 +338,48 @@ void USART2_IRQHandler(void)
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
-
+	uint32_t tmp_flag = 0;
+	uint32_t temp;
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */
+	tmp_flag =__HAL_UART_GET_FLAG(&huart3,UART_FLAG_IDLE);
+	if((tmp_flag != RESET)){
 
+	__HAL_UART_CLEAR_IDLEFLAG(&huart3);
+
+	/* 读取串口状态寄存器（芯片型号不同，寄存器名称可能需要修改） */
+	temp = huart3.Instance->SR;
+	/* 读取串口数据寄存器（芯片型号不同，寄存器名称可能需要修改） */
+	temp = huart3.Instance->DR;
+	HAL_UART_DMAStop(&huart3);
+	/* 读取DMA剩余传输数量（芯片型号不同，寄存器名称可能需要修改） */
+	temp= hdma_usart3_rx.Instance->NDTR;
+	//A5 14 00 89 07 04 00 13 A8 B3 41 18 2F 27 3D 73 81 6A 3F 00 00 70 42 00 00 00 00 97 EC   实时热量数据
+	//A5 10 00 8A 7B 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 31 44               机器人位置信息
+
+	//29是实时热量数据长度，25是机器人位置信息数据长度,都为50HZ发送一次，而且为同时发送的
+	if(temp == BUFFER_SIZE - 17)
+		{
+			if (rx_buffer[5] == 02 &&rx_buffer[6] == 02 && Verify_CRC16_Check_Sum(rx_buffer, 17))
+			{
+					FT.U[3] = rx_buffer[10];
+					FT.U[2] = rx_buffer[9];
+					FT.U[1] = rx_buffer[8];
+					FT.U[0] = rx_buffer[7];
+					receive_103_data .chassis_power  = FT.F;
+				  FT.U[1] = rx_buffer[12];
+				  FT.U[0] = rx_buffer[11];
+				  receive_103_data .shooter_heat0  = FT.I;
+				  FT.U[1] = rx_buffer[14];
+				  FT.U[0] = rx_buffer[13];
+				  receive_103_data .shooter_heat0_cooling_limit = FT.I;	
+			}
+		}			
+		
+	rx_len =BUFFER_SIZE - temp;
+	recv_end_flag = 1;
+	}
   /* USER CODE END USART3_IRQn 1 */
 }
 

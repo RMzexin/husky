@@ -23,13 +23,15 @@
 #define LAUNCH_STOP              0
 #define SLOW_FREQUENCY           1
 #define HIGH_FREQUENCY           2
-#define SLOW_FREQUENCY_INTERVAL  300      //低频连续发弹间隔时间 ms
-#define HIGH_FREQUENCY_INTERVAL  150      //高频发弹间隔时间 ms
+#define SLOW_FREQUENCY_INTERVAL    300      //低频连续发弹间隔时间 ms
+#define HIGH_FREQUENCY_INTERVAL    150      //高频发弹间隔时间 ms
+#define SIMGLE_FREQUENCY_INTERVAL  500      //单发连发间隔时间 ms
 
 #define SINGLE_SHOT_MODE     1
 #define RUNING_FIRE_MODE     2
 
-
+extern uint8_t Excess_heat_indicator_light;
+extern uint8_t firing_indicator_light;
 
 void friction_wheel_mode(void);
 float pluck_angle_add(void);

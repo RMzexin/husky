@@ -61,3 +61,5 @@ infantry2.0\main.o: .\application\Init_Task.h
 infantry2.0\main.o: .\application\gimbal_task.h
 infantry2.0\main.o: .\application\control_task.h
 infantry2.0\main.o: .\application\can_task.h
+infantry2.0\main.o: .\application\Driver_Judge.h
+infantry2.0\main.o: .\application\CommonDataStructure.h
